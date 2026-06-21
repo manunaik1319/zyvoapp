@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Bell, Settings, Check, Clock, Trophy, Calendar, CreditCard, Award } from 'lucide-react';
+import { QrCode } from './QrCode';
 
 interface ProfileTabProps {
   onSwitchTab: (tabName: string) => void;
@@ -14,6 +15,13 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
   onOpenNotifications,
   hasUnread
 }) => {
+  const [isIdFlipped, setIsIdFlipped] = useState(false);
+  const [backTab, setBackTab] = useState<'pass' | 'settings'>('pass');
+  const [studentName, setStudentName] = useState('Manohar L.');
+  const [studentCollege, setStudentCollege] = useState('IIIT Sonepat');
+  const [focusPref, setFocusPref] = useState<'silent' | 'wifi' | 'cafe'>('silent');
+  const [pushAlerts, setPushAlerts] = useState(true);
+
   return (
     <div className="app-main-content app-screen-view active-view" id="tab-panel-profile">
       {/* Profile Header */}
@@ -31,7 +39,11 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
           <button 
             className="profile-icon-button" 
             type="button" 
-            onClick={() => showToast('Profile settings opened')} 
+            onClick={() => {
+              setBackTab('settings');
+              setIsIdFlipped(true);
+              showToast('Opened settings panel');
+            }} 
             aria-label="Settings"
           >
             <Settings size={18} />
@@ -39,53 +51,267 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
         </div>
       </header>
 
-      {/* Campus ID Card */}
-      <section className="campus-id-card">
-        <div className="campus-id-brand">
-          <span>ZYVO · Student Passport</span>
-          <span className="campus-id-chip"></span>
-        </div>
-        <div className="campus-id-main">
-          <div className="verified-avatar-ring">
-            <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=240&q=85" alt="Manohar L." />
-            <span className="avatar-verified-mark">
-              <Check size={12} strokeWidth={3} />
-            </span>
-          </div>
-          <div className="campus-profile-copy">
-            <div className="campus-name-row">
-              <h3 className="campus-student-name">Manohar L.</h3>
-              <span className="verified-text-badge">VERIFIED</span>
+      {/* Interactive Flipping Student ID Pass */}
+      <section className="profile-id-container" onClick={() => setIsIdFlipped(!isIdFlipped)}>
+        <div className={`profile-id-inner ${isIdFlipped ? 'flipped' : ''}`}>
+          
+          {/* CARD FRONT FACE */}
+          <div className="campus-id-card campus-id-front">
+            <div className="campus-id-brand">
+              <span>ZYVO · Student Passport</span>
+              <span className="campus-id-chip"></span>
             </div>
-            <p className="campus-student-role">CSE Undergraduate Student</p>
-            <div className="campus-meta">
-              <span>IIIT Sonepat</span>
-              <span>•</span>
-              <span>Semester 3</span>
+            <div className="campus-id-main">
+              <div className="verified-avatar-ring">
+                <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=240&q=85" alt="Manohar L." />
+                <span className="avatar-verified-mark">
+                  <Check size={12} strokeWidth={3} />
+                </span>
+                <button 
+                  className="avatar-settings-badge"
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setBackTab('settings');
+                    setIsIdFlipped(true);
+                    showToast('Opened settings panel');
+                  }}
+                  aria-label="Avatar settings"
+                >
+                  <Settings size={10} style={{ strokeWidth: 2.5 }} />
+                </button>
+              </div>
+              <div className="campus-profile-copy">
+                <div className="campus-name-row">
+                  <h3 className="campus-student-name">{studentName}</h3>
+                  <span className="verified-text-badge">VERIFIED</span>
+                </div>
+                <p className="campus-student-role">CSE Undergraduate Student</p>
+                <div className="campus-meta">
+                  <span>{studentCollege}</span>
+                  <span>•</span>
+                  <span>Semester 3</span>
+                </div>
+              </div>
+            </div>
+            <div className="achievement-strip">
+              <div className="achievement-mini">
+                <span className="achievement-mini-icon">🔥</span>
+                <strong>42 Days</strong>
+                <small>STREAK</small>
+              </div>
+              <div className="achievement-mini">
+                <span className="achievement-mini-icon">⏱️</span>
+                <strong>24.5 hrs</strong>
+                <small>FOCUS</small>
+              </div>
+              <div className="achievement-mini">
+                <span className="achievement-mini-icon">🏆</span>
+                <strong>#12</strong>
+                <small>RANK</small>
+              </div>
+              <div className="achievement-mini">
+                <span className="achievement-mini-icon">🥇</span>
+                <strong>Top 5%</strong>
+                <small>PERFORMER</small>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="achievement-strip">
-          <div className="achievement-mini">
-            <span className="achievement-mini-icon">🔥</span>
-            <strong>42 Days</strong>
-            <small>STREAK</small>
+
+          {/* CARD BACK FACE (SECURE QR CODE PASSPORT & SETTINGS) */}
+          <div className="campus-id-card campus-id-back">
+            <div className="campus-id-brand" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+              <div 
+                style={{ display: 'flex', background: 'rgba(255, 255, 255, 0.1)', padding: '2px', borderRadius: '6px' }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  type="button"
+                  onClick={() => setBackTab('pass')}
+                  style={{
+                    border: 'none',
+                    background: backTab === 'pass' ? 'rgba(255,255,255,0.25)' : 'transparent',
+                    color: '#FFFFFF',
+                    fontSize: '8.5px',
+                    fontWeight: 800,
+                    padding: '3px 8px',
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  Campus Pass
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setBackTab('settings')}
+                  style={{
+                    border: 'none',
+                    background: backTab === 'settings' ? 'rgba(255,255,255,0.25)' : 'transparent',
+                    color: '#FFFFFF',
+                    fontSize: '8.5px',
+                    fontWeight: 800,
+                    padding: '3px 8px',
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  Settings
+                </button>
+              </div>
+              <span className="verified-text-badge" style={{ background: backTab === 'pass' ? 'rgba(16, 185, 129, 0.15)' : 'rgba(59, 102, 245, 0.25)', color: backTab === 'pass' ? '#34D399' : '#818CF8', border: backTab === 'pass' ? '1px solid rgba(16, 185, 129, 0.2)' : '1px solid rgba(59, 102, 245, 0.3)', padding: '2px 6px' }}>
+                {backTab === 'pass' ? 'ACTIVE PASS' : 'EDIT MODE'}
+              </span>
+            </div>
+            
+            {backTab === 'pass' ? (
+              /* PASS VIEW */
+              <div style={{ display: 'flex', gap: '14px', alignItems: 'center', flex: 1, padding: '4px 0', width: '100%' }}>
+                {/* Real dynamic QR image for Student Pass */}
+                <div style={{ background: '#FFFFFF', padding: '6px', borderRadius: '10px', display: 'grid', placeItems: 'center', width: '82px', height: '82px', flexShrink: 0 }}>
+                  <QrCode 
+                    value={`ZYVO-STU-${studentName.toUpperCase().replace(/\s+/g, '-')}-${studentCollege.toUpperCase().replace(/\s+/g, '-')}-1280`} 
+                    size={70} 
+                  />
+                </div>
+                
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', textAlign: 'left', minWidth: 0 }}>
+                  <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '8px', letterSpacing: '0.04em', fontWeight: 600 }}>PASSPORT REFERENCE</span>
+                  <strong style={{ fontSize: '13px', color: '#FFF', fontFamily: 'monospace', letterSpacing: '0.05em' }}>ZYV-STU-2490-F</strong>
+                  
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginTop: '4px' }}>
+                    <div>
+                      <span style={{ color: 'rgba(255,255,255,0.5)', display: 'block', fontSize: '7px', fontWeight: 600 }}>RANK</span>
+                      <span style={{ fontSize: '10.5px', fontWeight: 700 }}>#12 Campus</span>
+                    </div>
+                    <div>
+                      <span style={{ color: 'rgba(255,255,255,0.5)', display: 'block', fontSize: '7px', fontWeight: 600 }}>CREDITS</span>
+                      <span style={{ fontSize: '10.5px', fontWeight: 700, color: '#F59E0B' }}>1,280 Pts</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              /* SETTINGS VIEW */
+              <div 
+                style={{ display: 'flex', flexDirection: 'column', gap: '6px', flex: 1, padding: '4px 0', width: '100%' }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Inputs for Name & College */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                    <label style={{ color: 'rgba(255,255,255,0.7)', fontSize: '7px', fontWeight: 700, letterSpacing: '0.03em' }}>FULL NAME</label>
+                    <input 
+                      type="text" 
+                      value={studentName}
+                      onChange={(e) => setStudentName(e.target.value)}
+                      style={{
+                        background: 'rgba(255,255,255,0.1)',
+                        border: '1px solid rgba(255,255,255,0.15)',
+                        borderRadius: '6px',
+                        color: '#FFFFFF',
+                        fontSize: '9.5px',
+                        padding: '4px 6px',
+                        outline: 'none',
+                        fontFamily: "'Outfit', sans-serif"
+                      }}
+                    />
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                    <label style={{ color: 'rgba(255,255,255,0.7)', fontSize: '7px', fontWeight: 700, letterSpacing: '0.03em' }}>COLLEGE</label>
+                    <input 
+                      type="text" 
+                      value={studentCollege}
+                      onChange={(e) => setStudentCollege(e.target.value)}
+                      style={{
+                        background: 'rgba(255,255,255,0.1)',
+                        border: '1px solid rgba(255,255,255,0.15)',
+                        borderRadius: '6px',
+                        color: '#FFFFFF',
+                        fontSize: '9.5px',
+                        padding: '4px 6px',
+                        outline: 'none',
+                        fontFamily: "'Outfit', sans-serif"
+                      }}
+                    />
+                  </div>
+                </div>
+
+                {/* Preference Segmented Selector & Switch Alert */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '2px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                    <label style={{ color: 'rgba(255,255,255,0.7)', fontSize: '7px', fontWeight: 700, letterSpacing: '0.03em' }}>FOCUS ZONE PREF</label>
+                    <div style={{ display: 'flex', background: 'rgba(0,0,0,0.15)', padding: '1px', borderRadius: '4px' }}>
+                      {(['silent', 'wifi', 'cafe'] as const).map((pref) => (
+                        <button
+                          key={pref}
+                          type="button"
+                          onClick={() => {
+                            setFocusPref(pref);
+                            showToast(`Preference set to ${pref.toUpperCase()}`);
+                          }}
+                          style={{
+                            border: 'none',
+                            background: focusPref === pref ? '#3B66F5' : 'transparent',
+                            color: '#FFFFFF',
+                            fontSize: '7.5px',
+                            fontWeight: 800,
+                            padding: '2px 6px',
+                            borderRadius: '3px',
+                            cursor: 'pointer',
+                            textTransform: 'uppercase',
+                            transition: 'all 0.15s ease'
+                          }}
+                        >
+                          {pref}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '8px' }}>
+                    <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '7.5px', fontWeight: 700 }}>ALERTS</span>
+                    <label className="toggle-switch-container" style={{ position: 'relative', display: 'inline-block', width: '26px', height: '14px' }}>
+                      <input 
+                        type="checkbox" 
+                        checked={pushAlerts}
+                        onChange={(e) => {
+                          setPushAlerts(e.target.checked);
+                          showToast(e.target.checked ? 'Broadcast alerts enabled' : 'Broadcast alerts disabled');
+                        }}
+                        style={{ opacity: 0, width: 0, height: 0 }}
+                      />
+                      <span className="toggle-slider" style={{
+                        position: 'absolute',
+                        cursor: 'pointer',
+                        top: 0, left: 0, right: 0, bottom: 0,
+                        backgroundColor: pushAlerts ? '#10B981' : 'rgba(255,255,255,0.2)',
+                        borderRadius: '14px',
+                        transition: '0.3s'
+                      }}>
+                        <span style={{
+                          position: 'absolute',
+                          height: '10px', width: '10px',
+                          left: pushAlerts ? '14px' : '2px',
+                          bottom: '2px',
+                          backgroundColor: 'white',
+                          borderRadius: '50%',
+                          transition: '0.3s'
+                        }} />
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '8px', color: 'rgba(255, 255, 255, 0.4)', borderTop: '1px dashed rgba(255, 255, 255, 0.15)', paddingTop: '8px', marginTop: '4px', width: '100%' }}>
+              <span>{studentCollege} · CSE Undergraduate</span>
+              <span style={{ fontWeight: 800 }}>Tap to Flip Back</span>
+            </div>
           </div>
-          <div className="achievement-mini">
-            <span className="achievement-mini-icon">⏱️</span>
-            <strong>24.5 hrs</strong>
-            <small>FOCUS</small>
-          </div>
-          <div className="achievement-mini">
-            <span className="achievement-mini-icon">🏆</span>
-            <strong>#12</strong>
-            <small>RANK</small>
-          </div>
-          <div className="achievement-mini">
-            <span className="achievement-mini-icon">🥇</span>
-            <strong>Top 5%</strong>
-            <small>PERFORMER</small>
-          </div>
+
         </div>
       </section>
 
@@ -226,7 +452,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
           <span className="activity-icon">🎯</span>
           <span className="activity-copy">
             <strong>Checked into Study Hub</strong>
-            <small>Kalyan Reading Room</small>
+            <small>Banjara Hills Reading Room</small>
           </span>
           <span className="activity-time">10m</span>
         </div>

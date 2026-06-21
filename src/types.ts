@@ -23,6 +23,7 @@ export interface Space {
 export interface Reservation {
   id: string;
   spaceName: string;
+  spaceId?: string;
   deskId: string;
   duration: string;
   price: number;

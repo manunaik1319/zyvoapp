@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Check, Bell } from 'lucide-react';
+import { Bell } from 'lucide-react';
 import type { Space, Reservation, LocationOption } from './types';
 import { Splash } from './components/Splash';
 import { Onboarding } from './components/Onboarding';
@@ -10,8 +10,10 @@ import { DiscoverTab } from './components/DiscoverTab';
 import { ReserveTab } from './components/ReserveTab';
 import { MapTab } from './components/MapTab';
 import { ProfileTab } from './components/ProfileTab';
-import { BookingSheet } from './components/BookingSheet';
 import { ConfettiCanvas } from './components/ConfettiCanvas';
+import { PaymentFlow } from './components/PaymentFlow';
+import { SpaceDetails } from './components/SpaceDetails';
+import { SeatSelection } from './components/SeatSelection';
 
 export interface NotificationItem {
   id: string;
@@ -43,7 +45,7 @@ function App() {
     {
       id: '2',
       title: 'Booking Confirmed',
-      body: 'Desk #4 at Kalyan Reading Room is reserved. Show your pass at check-in.',
+      body: 'Desk #4 at Banjara Hills Reading Room is reserved. Show your pass at check-in.',
       time: '5h ago',
       unread: true,
       icon: '🏢'
@@ -61,6 +63,8 @@ function App() {
   // App routing & views state
   const [activeTab, setActiveTab] = useState('discover');
   const [selectedSpace, setSelectedSpace] = useState<Space | null>(null);
+  const [bookingSpace, setBookingSpace] = useState<Space | null>(null);
+  const [mapFocusSpaceId, setMapFocusSpaceId] = useState<string | null>(null);
   
   // Search & Filter state
   const [searchQuery, setSearchQuery] = useState('');
@@ -73,7 +77,13 @@ function App() {
 
   // Booking & transaction state
   const [bookings, setBookings] = useState<Reservation[]>([]);
-  const [successBooking, setSuccessBooking] = useState<Reservation | null>(null);
+  const [pendingBooking, setPendingBooking] = useState<{
+    space: Space;
+    deskId: string;
+    duration: string;
+    price: number;
+    paymentMethod: string;
+  } | null>(null);
   const [confettiTrigger, setConfettiTrigger] = useState(0);
 
   // Toast state
@@ -126,38 +136,25 @@ function App() {
     });
   };
 
-  // Confirm booking callback from sheet
-  const handleConfirmBooking = (spaceName: string, deskId: string, duration: string, price: number) => {
-    const timeNow = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    const ticketCode = `ZYV-${Math.floor(1000 + Math.random() * 9000)}-F`;
+  // Confirm booking callback from seat selection page
+  const handleConfirmBooking = (
+    _spaceName: string, 
+    deskId: string, 
+    duration: string, 
+    price: number, 
+    paymentMethod: string
+  ) => {
+    if (!bookingSpace) return;
     
-    const newReservation: Reservation = {
-      id: Math.random().toString(36).substring(2, 9),
-      spaceName,
+    setPendingBooking({
+      space: bookingSpace,
       deskId: `Desk ${deskId}`,
       duration,
       price,
-      time: timeNow,
-      ticketCode
-    };
-
-    setBookings((prev) => [newReservation, ...prev]);
-    setSelectedSpace(null);
-    setSuccessBooking(newReservation);
+      paymentMethod
+    });
     
-    // Trigger confetti physics animation
-    setConfettiTrigger((t) => t + 1);
-
-    // Add unread notification for the confirmed reservation in real time
-    const bookingNotification: NotificationItem = {
-      id: Math.random().toString(),
-      title: 'Booking Confirmed',
-      body: `Spot ${newReservation.deskId} at ${spaceName} is locked in. Show code ${ticketCode} at desk check-in.`,
-      time: 'Just now',
-      unread: true,
-      icon: '🏢'
-    };
-    setNotifications((prev) => [bookingNotification, ...prev]);
+    setBookingSpace(null);
   };
 
   const handleMarkAsRead = (id: string) => {
@@ -166,11 +163,6 @@ function App() {
 
   const handleClearAllNotifications = () => {
     setNotifications([]);
-  };
-
-  const handleDismissReceipt = () => {
-    setSuccessBooking(null);
-    setActiveTab('reserve');
   };
 
   const handleCancelBooking = (id: string) => {
@@ -205,6 +197,11 @@ function App() {
             bookings={bookings}
             onCancelBooking={handleCancelBooking}
             showToast={showToast}
+            onSwitchTab={setActiveTab}
+            onNavigateToSpace={(spaceId) => {
+              setMapFocusSpaceId(spaceId);
+              setActiveTab('map');
+            }}
           />
         );
       case 'map':
@@ -212,6 +209,8 @@ function App() {
           <MapTab 
             onSelectSpace={setSelectedSpace}
             showToast={showToast}
+            focusSpaceId={mapFocusSpaceId}
+            onClearFocus={() => setMapFocusSpaceId(null)}
           />
         );
       case 'profile':
@@ -223,55 +222,7 @@ function App() {
             hasUnread={hasUnread}
           />
         );
-      case 'rewards':
-        return (
-          <div className="app-main-content app-screen-view active-view" id="tab-panel-rewards" style={{ gap: '20px' }}>
-            <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div>
-                <h2 style={{ fontFamily: 'Outfit', fontSize: '22px', fontWeight: 900, color: 'var(--zyvo-text-main)', letterSpacing: '-0.04em' }}>Rewards 🪙</h2>
-                <p style={{ fontSize: '12px', color: 'var(--zyvo-text-muted)', marginTop: '2px' }}>Earn coins by focusing</p>
-              </div>
-              <span style={{ background: 'linear-gradient(135deg,#2563FF,#4F7DFF)', color: '#fff', borderRadius: '12px', padding: '6px 14px', fontSize: '12px', fontWeight: 800 }}>120 coins</span>
-            </header>
 
-            {/* Coin balance card */}
-            <div style={{ background: 'linear-gradient(135deg, #2563FF 0%, #4F7DFF 100%)', borderRadius: '22px', padding: '22px', color: '#fff', boxShadow: '0 16px 40px rgba(37,99,255,0.28)' }}>
-              <p style={{ fontSize: '11px', opacity: 0.8, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Total Zyvo Coins</p>
-              <p style={{ fontSize: '42px', fontWeight: 900, fontFamily: 'Outfit', letterSpacing: '-0.05em', margin: '6px 0 2px' }}>🪙 120</p>
-              <p style={{ fontSize: '11px', opacity: 0.75 }}>≈ ₹60 credits · Redeemable anytime</p>
-              <button onClick={() => showToast('Redeeming coins!')} style={{ marginTop: '16px', background: 'rgba(255,255,255,0.2)', border: '1px solid rgba(255,255,255,0.35)', borderRadius: '12px', color: '#fff', padding: '9px 20px', fontSize: '12px', fontWeight: 800, cursor: 'pointer', backdropFilter: 'blur(10px)' }}>Redeem Now →</button>
-            </div>
-
-            {/* Stats row */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-              {[
-                { emoji: '🔥', val: '7', lbl: 'Day Streak', sub: '+10 bonus coins' },
-                { emoji: '⏱️', val: '24h', lbl: 'Focus Hours', sub: 'This week' },
-                { emoji: '👥', val: '2', lbl: 'Referrals', sub: '+40 coins earned' },
-                { emoji: '⚡', val: '2×', lbl: 'Boost Active', sub: 'Until Sunday' },
-              ].map((s, i) => (
-                <div key={i} style={{ background: '#fff', borderRadius: '18px', padding: '16px', boxShadow: '0 4px 16px rgba(0,0,0,0.05)', border: '1px solid #EEF2FF' }}>
-                  <div style={{ fontSize: '22px', marginBottom: '4px' }}>{s.emoji}</div>
-                  <div style={{ fontSize: '20px', fontWeight: 900, color: '#0F1B35', fontFamily: 'Outfit', letterSpacing: '-0.04em' }}>{s.val}</div>
-                  <div style={{ fontSize: '11px', fontWeight: 700, color: '#0F1B35', marginTop: '2px' }}>{s.lbl}</div>
-                  <div style={{ fontSize: '10px', color: '#94A3C0', marginTop: '2px' }}>{s.sub}</div>
-                </div>
-              ))}
-            </div>
-
-            {/* Refer CTA */}
-            <div style={{ background: 'linear-gradient(135deg, #FFF7ED, #FEF3C7)', borderRadius: '20px', padding: '20px', border: '1px solid #FDE68A', display: 'flex', alignItems: 'center', gap: '14px', cursor: 'pointer' }} onClick={() => showToast('Referral link copied!')}>
-              <div style={{ fontSize: '32px' }}>🎁</div>
-              <div>
-                <p style={{ fontWeight: 900, fontSize: '14px', color: '#92400E' }}>Refer a Friend</p>
-                <p style={{ fontSize: '11px', color: '#B45309', marginTop: '2px' }}>Get 20 coins per referral · No limit!</p>
-                <p style={{ fontSize: '10px', marginTop: '6px', color: '#D97706', fontWeight: 700 }}>Tap to copy your link →</p>
-              </div>
-            </div>
-
-            <div style={{ height: '80px' }} />
-          </div>
-        );
       default:
         return null;
     }
@@ -285,12 +236,65 @@ function App() {
       statusColor={showSplash || showOnboarding || showAuth || welcomeType !== null ? 'light' : 'dark'}
       overlays={
         <>
-          {/* Booking bottom sheet slide-up */}
-          <BookingSheet 
-            space={selectedSpace}
-            onClose={() => setSelectedSpace(null)}
-            onConfirmBooking={handleConfirmBooking}
-          />
+          {/* Space Details Page Overlay */}
+          {selectedSpace && (
+            <SpaceDetails
+              space={selectedSpace}
+              onClose={() => setSelectedSpace(null)}
+              onProceed={() => {
+                setBookingSpace(selectedSpace);
+                setSelectedSpace(null);
+              }}
+              isSaved={savedSpaces.includes(selectedSpace.id)}
+              onToggleSave={toggleSaveSpace}
+            />
+          )}
+
+          {/* Seat Selection Page Overlay */}
+          {bookingSpace && (
+            <SeatSelection
+              space={bookingSpace}
+              onBack={() => {
+                setSelectedSpace(bookingSpace);
+                setBookingSpace(null);
+              }}
+              onClose={() => setBookingSpace(null)}
+              onConfirm={handleConfirmBooking}
+            />
+          )}
+
+          {pendingBooking && (
+            <PaymentFlow
+              space={pendingBooking.space}
+              deskId={pendingBooking.deskId}
+              duration={pendingBooking.duration}
+              price={pendingBooking.price}
+              initialPaymentMethod={pendingBooking.paymentMethod}
+              onCancel={() => {
+                if (pendingBooking) {
+                  setBookingSpace(pendingBooking.space);
+                }
+                setPendingBooking(null);
+              }}
+              onSuccess={(newReservation) => {
+                setBookings((prev) => [newReservation, ...prev]);
+                setPendingBooking(null);
+                setConfettiTrigger((t) => t + 1);
+
+                const bookingNotification: NotificationItem = {
+                  id: Math.random().toString(),
+                  title: 'Booking Confirmed',
+                  body: `Spot ${newReservation.deskId} at ${newReservation.spaceName} is locked in. Show code ${newReservation.ticketCode} at desk check-in.`,
+                  time: 'Just now',
+                  unread: true,
+                  icon: '🏢'
+                };
+                setNotifications((prev) => [bookingNotification, ...prev]);
+                setActiveTab('reserve');
+                showToast('Booking Confirmed!');
+              }}
+            />
+          )}
 
           {/* Confetti physics particles */}
           <ConfettiCanvas trigger={confettiTrigger} />
@@ -358,54 +362,7 @@ function App() {
             )}
           </div>
 
-          {/* Success Booking Receipt Overlay */}
-          {successBooking && (
-            <div className="booking-receipt-overlay" style={{ display: 'flex' }}>
-              <div className="checkmark-ring">
-                <Check size={36} strokeWidth={3} />
-              </div>
-              <h3 className="receipt-title">Spot Reserved!</h3>
-              <p className="receipt-subtitle">
-                Your seat is locked in. Show this passport at the study desk check-in.
-              </p>
 
-              {/* Digital ticket code card */}
-              <div className="digital-ticket-box">
-                <div className="ticket-info-row">
-                  <span className="ticket-info-lbl">Study Space</span>
-                  <span className="ticket-info-val" id="receipt-space-name">{successBooking.spaceName}</span>
-                </div>
-                <div className="ticket-info-row">
-                  <span className="ticket-info-lbl">Assigned Spot</span>
-                  <span className="ticket-info-val" id="receipt-desk-id">{successBooking.deskId}</span>
-                </div>
-                <div className="ticket-info-row">
-                  <span className="ticket-info-lbl">Duration</span>
-                  <span className="ticket-info-val" id="receipt-duration">{successBooking.duration}</span>
-                </div>
-                <div className="ticket-dashed-line" />
-                <div className="ticket-info-row" style={{ marginTop: '4px' }}>
-                  <span className="ticket-info-lbl">Check-In Time</span>
-                  <span className="ticket-info-val">{successBooking.time}</span>
-                </div>
-                <div className="ticket-info-row">
-                  <span className="ticket-info-lbl">Passport Code</span>
-                  <span className="ticket-info-val" style={{ fontFamily: 'monospace', color: 'var(--zyvo-orange)' }}>
-                    {successBooking.ticketCode}
-                  </span>
-                </div>
-              </div>
-
-              <button 
-                className="btn-reserve-cta" 
-                onClick={handleDismissReceipt}
-                style={{ width: '100%', height: '44px', borderRadius: '12px' }}
-                type="button"
-              >
-                Done
-              </button>
-            </div>
-          )}
 
           {/* Profile/System Toast Notifications */}
           <div className={`profile-toast ${toastActive ? 'show' : ''}`} id="profile-toast" role="status">
@@ -438,8 +395,10 @@ function App() {
           onComplete={() => setWelcomeType(null)} 
         />
       ) : (
-        /* Active View Panel */
-        renderTabContent()
+        /* Active View Panel with transition key */
+        <div key={activeTab} className="app-view-wrapper">
+          {renderTabContent()}
+        </div>
       )}
     </IphoneFrame>
   );
