@@ -1,0 +1,4970 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZYVO — Premium Focus Spaces</title>
+    <meta name="description"
+        content="Find available study spaces nearby, check live occupancy, and reserve your perfect focus spot instantly with ZYVO.">
+
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Main Project Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ==========================================================================
+       Custom Supplementary Styles for ZYVO Premium Home Screen Mockup
+       ========================================================================== */
+        :root {
+            --zyvo-orange: #F97316;
+            --zyvo-orange-gradient: linear-gradient(135deg, #F97316 0%, #FB923C 100%);
+            --zyvo-orange-soft: rgba(249, 115, 22, 0.08);
+            --zyvo-orange-border: rgba(249, 115, 22, 0.25);
+            --zyvo-green: #22C55E;
+            --zyvo-green-bg: rgba(34, 197, 94, 0.09);
+            --zyvo-text-main: #0F0F12;
+            --zyvo-text-muted: #52525B;
+            --zyvo-text-disclaimer: #71717A;
+            --zyvo-border: rgba(0, 0, 0, 0.05);
+            --zyvo-card-bg: #FFFFFF;
+            --zyvo-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.02);
+            --zyvo-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.04);
+            --zyvo-shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Override body for centered iPhone canvas presentation */
+        body {
+            background: #FAF9F6 !important;
+            /* Plain off-white background as requested */
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Simulated High-End Bezel Frame Overrides for Front-on Matte 3D Look */
+        .iphone-canvas {
+            position: relative;
+            width: 402px;
+            height: 874px;
+            background: #FAF9F6;
+            border: 12px solid #1C1C1E !important;
+            /* Matte dark metallic bezel */
+            border-radius: 54px !important;
+            /* Soft shadow cast beneath the phone frame on the off-white surface */
+            box-shadow:
+                0 10px 20px rgba(0, 0, 0, 0.04),
+                0 30px 70px rgba(0, 0, 0, 0.12),
+                0 50px 100px rgba(0, 0, 0, 0.08),
+                inset 0 0 3px rgba(255, 255, 255, 0.15) !important;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.35s ease;
+        }
+
+        /* Custom scroll content padding and layout adjustments */
+        .app-main-content {
+            padding: 60px 18px 90px 18px;
+            /* Top padding accommodates status bar, bottom accounts for nav */
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Branding Header style */
+        .branding-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 0;
+        }
+
+        .brand-logo-pack {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-logo-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            color: var(--zyvo-text-main);
+        }
+
+        .brand-logo-o {
+            position: relative;
+            display: inline-block;
+        }
+
+        .brand-logo-o::before,
+        .brand-logo-o::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: var(--zyvo-orange);
+            top: 45%;
+            transform: translateY(-50%);
+        }
+
+        .brand-logo-o::before {
+            left: 30%;
+        }
+
+        .brand-logo-o::after {
+            right: 30%;
+        }
+
+        .user-profile-trigger {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1.5px solid var(--zyvo-orange);
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(249, 115, 22, 0.15);
+            transition: transform 0.2s ease;
+        }
+
+        .user-profile-trigger:hover {
+            transform: scale(1.05);
+        }
+
+        .user-profile-trigger img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Greeting Style */
+        .greeting-area {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .greeting-headline {
+            font-family: 'Outfit', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--zyvo-text-main);
+        }
+
+        .greeting-subheadline {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--zyvo-text-muted);
+        }
+
+        /* Delivery-app inspired location picker */
+        .location-picker-wrap {
+            position: relative;
+        }
+
+        .location-picker-button {
+            width: 100%;
+            background: #FFFFFF;
+            border: 1px solid rgba(20, 20, 24, 0.06);
+            border-radius: 15px;
+            padding: 9px 11px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-align: left;
+            font-family: inherit;
+            cursor: pointer;
+            box-shadow: 0 8px 22px rgba(26, 26, 32, 0.045);
+            transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+        }
+
+        .location-picker-button:hover {
+            border-color: rgba(249, 115, 22, 0.16);
+            box-shadow: 0 10px 26px rgba(26, 26, 32, 0.06);
+            transform: translateY(-1px);
+        }
+
+        .location-pin-box {
+            width: 30px;
+            height: 30px;
+            border-radius: 10px;
+            background: var(--zyvo-orange-soft);
+            color: var(--zyvo-orange);
+            display: grid;
+            place-items: center;
+            flex: 0 0 auto;
+        }
+
+        .location-pin-box svg {
+            width: 15px;
+            height: 15px;
+        }
+
+        .location-copy {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .location-label-row {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--zyvo-text-main);
+        }
+
+        .location-label-row svg {
+            width: 12px;
+            height: 12px;
+            color: var(--zyvo-orange);
+        }
+
+        .location-address {
+            display: block;
+            margin-top: 1px;
+            color: var(--zyvo-text-muted);
+            font-size: 10px;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .location-menu {
+            position: absolute;
+            top: calc(100% + 7px);
+            left: 0;
+            right: 0;
+            z-index: 30;
+            display: none;
+            padding: 6px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid var(--zyvo-border);
+            box-shadow: 0 16px 34px rgba(15, 15, 18, 0.12);
+            backdrop-filter: blur(16px);
+        }
+
+        .location-menu.open {
+            display: block;
+            animation: locationMenuIn 0.2s ease-out;
+        }
+
+        @keyframes locationMenuIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .location-option {
+            width: 100%;
+            border: 0;
+            background: transparent;
+            border-radius: 10px;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--zyvo-text-main);
+            font-family: inherit;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .location-option:hover {
+            background: var(--zyvo-orange-soft);
+        }
+
+        .location-option-icon {
+            width: 27px;
+            height: 27px;
+            border-radius: 9px;
+            display: grid;
+            place-items: center;
+            color: var(--zyvo-orange);
+            background: var(--zyvo-orange-soft);
+            font-size: 13px;
+        }
+
+        .location-option strong,
+        .location-option small {
+            display: block;
+        }
+
+        .location-option strong {
+            font-size: 11px;
+        }
+
+        .location-option small {
+            margin-top: 2px;
+            color: var(--zyvo-text-muted);
+            font-size: 9px;
+        }
+
+        /* Search Bar Layout */
+        .search-input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input-field {
+            width: 100%;
+            height: 48px;
+            background: #FFFFFF;
+            border: 1px solid var(--zyvo-border);
+            border-radius: 14px;
+            padding: 0 16px 0 44px;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--zyvo-text-main);
+            box-shadow: var(--zyvo-shadow-sm);
+            outline: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .search-input-field:focus {
+            border-color: var(--zyvo-orange);
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.08), var(--zyvo-shadow-md);
+        }
+
+        .search-icon-svg {
+            position: absolute;
+            left: 16px;
+            color: var(--zyvo-text-disclaimer);
+            pointer-events: none;
+            transition: color 0.3s ease;
+        }
+
+        .search-input-field:focus~.search-icon-svg {
+            color: var(--zyvo-orange);
+        }
+
+        /* Filter Chips Slider */
+        .filter-scroll-row {
+            margin: 0 -18px;
+            padding: 2px 18px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .filter-scroll-row::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-chips-flex {
+            display: flex;
+            gap: 8px;
+            width: max-content;
+        }
+
+        .orange-outlined-chip {
+            background: #FFFFFF;
+            border: 1.5px solid var(--zyvo-orange-border);
+            color: var(--zyvo-orange);
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .orange-outlined-chip:hover {
+            background: rgba(249, 115, 22, 0.03);
+            transform: translateY(-0.5px);
+        }
+
+        .orange-outlined-chip.active {
+            background: var(--zyvo-orange-gradient);
+            border-color: var(--zyvo-orange);
+            color: #FFFFFF;
+            box-shadow: 0 4px 10px rgba(249, 115, 22, 0.2);
+        }
+
+        /* Subsections */
+        .row-title-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 4px;
+            margin-bottom: -4px;
+        }
+
+        .row-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--zyvo-text-main);
+            letter-spacing: -0.01em;
+        }
+
+        .row-link-btn {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--zyvo-orange);
+            cursor: pointer;
+        }
+
+        /* Premium Featured Card */
+        .premium-featured-card {
+            background: var(--zyvo-card-bg);
+            border-radius: 20px;
+            border: 1px solid var(--zyvo-border);
+            box-shadow: var(--zyvo-shadow-lg);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .premium-featured-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+            border-color: rgba(249, 115, 22, 0.18);
+        }
+
+        .featured-card-image-box {
+            position: relative;
+            width: 100%;
+            height: 135px;
+            background: #F1EFEA;
+            overflow: hidden;
+        }
+
+        .featured-card-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .premium-featured-card:hover .featured-card-image-box img {
+            transform: scale(1.03);
+        }
+
+        /* Orange Pulsing LIVE Indicator Badge */
+        .live-status-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(15, 15, 18, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            z-index: 5;
+        }
+
+        .live-dot-pulse {
+            width: 8px;
+            height: 8px;
+            background: var(--zyvo-orange);
+            border-radius: 50%;
+            position: relative;
+            display: inline-block;
+        }
+
+        .live-dot-pulse::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid var(--zyvo-orange);
+            animation: pulseAnim 1.8s infinite;
+            opacity: 0;
+        }
+
+        @keyframes pulseAnim {
+            0% {
+                transform: scale(0.6);
+                opacity: 0.9;
+            }
+
+            100% {
+                transform: scale(2.2);
+                opacity: 0;
+            }
+        }
+
+        .featured-card-body {
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .featured-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .featured-card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            color: var(--zyvo-text-main);
+        }
+
+        .featured-card-meta-row {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: var(--zyvo-text-muted);
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        /* Orange Occupancy Badge */
+        .occupancy-badge-orange {
+            background: rgba(249, 115, 22, 0.09);
+            border: 1px solid rgba(249, 115, 22, 0.15);
+            color: var(--zyvo-orange);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .featured-details-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            border-top: 1px solid var(--zyvo-border);
+            padding-top: 10px;
+        }
+
+        .featured-detail-pill {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--zyvo-text-muted);
+        }
+
+        .featured-detail-pill svg {
+            width: 14px;
+            height: 14px;
+            color: var(--zyvo-orange);
+        }
+
+        /* Reserve CTA Button */
+        .btn-reserve-cta {
+            width: 100%;
+            height: 38px;
+            background: var(--zyvo-orange-gradient);
+            color: #FFFFFF;
+            border: none;
+            border-radius: 10px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-reserve-cta:hover {
+            box-shadow: 0 6px 16px rgba(249, 115, 22, 0.35);
+            transform: translateY(-0.5px);
+        }
+
+        .btn-reserve-cta:active {
+            transform: scale(0.98);
+        }
+
+        /* Compact Listings List */
+        .compact-listings-box {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .compact-space-card {
+            background: var(--zyvo-card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--zyvo-border);
+            box-shadow: var(--zyvo-shadow-sm);
+            padding: 12px;
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .compact-space-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--zyvo-shadow-md);
+            border-color: rgba(249, 115, 22, 0.15);
+        }
+
+        .compact-thumbnail-box {
+            width: 80px;
+            height: 72px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #F1EFEA;
+        }
+
+        .compact-thumbnail-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .compact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .compact-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--zyvo-text-main);
+        }
+
+        .compact-meta-row {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            color: var(--zyvo-text-muted);
+            font-weight: 500;
+        }
+
+        .compact-amenity-tag {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--zyvo-text-muted);
+        }
+
+        .compact-amenity-tag svg {
+            width: 12px;
+            height: 12px;
+            color: var(--zyvo-orange);
+        }
+
+        /* Green Occupancy Badge */
+        .occupancy-badge-green {
+            background: var(--zyvo-green-bg);
+            border: 1px solid rgba(34, 197, 94, 0.15);
+            color: #16A34A;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            width: fit-content;
+        }
+
+        .btn-compact-reserve {
+            background: rgba(249, 115, 22, 0.08);
+            color: var(--zyvo-orange);
+            border: 1px solid rgba(249, 115, 22, 0.2);
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 12px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .btn-compact-reserve:hover {
+            background: var(--zyvo-orange);
+            border-color: var(--zyvo-orange);
+            color: #FFFFFF;
+            box-shadow: 0 4px 8px rgba(249, 115, 22, 0.2);
+        }
+
+        /* Trending Near You */
+        .trending-row-outer {
+            margin: 0 -18px;
+            padding: 4px 18px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .trending-row-outer::-webkit-scrollbar {
+            display: none;
+        }
+
+        .trending-flex-row {
+            display: flex;
+            gap: 14px;
+            width: max-content;
+        }
+
+        .trending-space-card {
+            width: 140px;
+            background: var(--zyvo-card-bg);
+            border: 1px solid var(--zyvo-border);
+            border-radius: 14px;
+            box-shadow: var(--zyvo-shadow-sm);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .trending-space-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--zyvo-shadow-md);
+            border-color: rgba(249, 115, 22, 0.15);
+        }
+
+        .trending-thumbnail-box {
+            width: 100%;
+            height: 90px;
+            border-radius: 8px;
+            background: #F1EFEA;
+            overflow: hidden;
+        }
+
+        .trending-thumbnail-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .trending-detail-block {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .trending-category-tag {
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: var(--zyvo-orange);
+        }
+
+        .trending-title-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--zyvo-text-main);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .trending-stats-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--zyvo-text-muted);
+            margin-top: 2px;
+        }
+
+        .trending-rating-block {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            color: var(--zyvo-text-main);
+            font-weight: 700;
+        }
+
+        .trending-rating-block svg {
+            width: 10px;
+            height: 10px;
+            fill: var(--zyvo-orange);
+            color: var(--zyvo-orange);
+        }
+
+        /* iOS Bottom Navigation Bar Styles */
+        .app-ios-bottom-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding-bottom: 14px;
+            /* Room for home indicator */
+            z-index: 990;
+        }
+
+        .app-nav-tab {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            cursor: pointer;
+            color: var(--zyvo-text-disclaimer);
+            width: 60px;
+            height: 48px;
+            transition: all 0.2s ease;
+        }
+
+        .app-nav-tab svg {
+            width: 22px;
+            height: 22px;
+            stroke-width: 2.2;
+            transition: transform 0.2s ease;
+        }
+
+        .app-nav-tab:hover svg {
+            transform: translateY(-1.5px);
+        }
+
+        .app-nav-tab-label {
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .app-nav-tab.active {
+            color: var(--zyvo-orange);
+        }
+
+        /* iOS Bottom Sheet (Slide up Reserve overlay) */
+        .booking-sheet-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1010;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(2px);
+        }
+
+        .booking-sheet-backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .booking-sheet-panel {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #FFFFFF;
+            border-radius: 24px 24px 0 0;
+            box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.15);
+            z-index: 1020;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 10px 18px 18px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            max-height: 88%;
+            overflow-y: auto;
+            scrollbar-width: none;
+        }
+
+        .booking-sheet-panel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .booking-sheet-panel.active {
+            transform: translateY(0);
+        }
+
+        .sheet-handle-bar {
+            width: 36px;
+            height: 5px;
+            background: rgba(0, 0, 0, 0.12);
+            border-radius: 100px;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+
+        .sheet-head-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sheet-title-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--zyvo-text-main);
+        }
+
+        .space-detail-hero {
+            display: grid;
+            grid-template-columns: 1.55fr .82fr;
+            gap: 8px;
+            min-height: 142px;
+        }
+
+        .space-detail-main-image,
+        .space-detail-side-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 18px;
+            background: #F4F4F5;
+        }
+
+        .space-detail-main-image img,
+        .space-detail-side-image img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .space-detail-main-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 38%, rgba(0, 0, 0, .48));
+        }
+
+        .space-detail-photo-badge {
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+            z-index: 1;
+            padding: 6px 9px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .92);
+            color: var(--zyvo-text-main);
+            font-size: 10px;
+            font-weight: 800;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, .12);
+        }
+
+        .space-detail-side-stack {
+            display: grid;
+            gap: 8px;
+        }
+
+        .space-detail-summary {
+            padding: 12px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #FFF7F0, #FFFFFF);
+            border: 1px solid rgba(249, 115, 22, .12);
+        }
+
+        .space-detail-meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 8px;
+        }
+
+        .space-detail-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 8px;
+            border-radius: 999px;
+            background: #FFFFFF;
+            border: 1px solid rgba(20, 20, 24, .06);
+            color: var(--zyvo-text-muted);
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .space-detail-copy {
+            margin-top: 9px;
+            color: var(--zyvo-text-muted);
+            font-size: 12px;
+            line-height: 1.45;
+        }
+
+        .space-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .space-info-card {
+            padding: 11px;
+            border-radius: 15px;
+            background: #FFFFFF;
+            border: 1px solid rgba(20, 20, 24, .06);
+            box-shadow: 0 8px 20px rgba(26, 26, 32, .04);
+        }
+
+        .space-info-card span {
+            display: block;
+            color: var(--zyvo-text-disclaimer);
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+
+        .space-info-card strong {
+            display: block;
+            margin-top: 4px;
+            color: var(--zyvo-text-main);
+            font-size: 12px;
+            line-height: 1.25;
+        }
+
+        .space-layout-card {
+            padding: 12px;
+            border-radius: 18px;
+            background: #FAFAFA;
+            border: 1px solid rgba(20, 20, 24, .055);
+        }
+
+        .space-layout-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 9px;
+        }
+
+        .space-layout-head strong {
+            font-size: 13px;
+            color: var(--zyvo-text-main);
+        }
+
+        .space-layout-head span {
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--zyvo-orange);
+        }
+
+        .mini-floor-layout {
+            display: grid;
+            grid-template-columns: 1.15fr .85fr;
+            gap: 8px;
+        }
+
+        .floor-zone {
+            min-height: 48px;
+            border-radius: 13px;
+            padding: 8px;
+            display: flex;
+            align-items: end;
+            color: #FFFFFF;
+            font-size: 10px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1F2937, #374151);
+        }
+
+        .floor-zone.focus {
+            min-height: 104px;
+            background: linear-gradient(135deg, #F97316, #FB923C);
+        }
+
+        .floor-zone.quiet {
+            background: linear-gradient(135deg, #0F172A, #334155);
+        }
+
+        .floor-zone.cafe {
+            background: linear-gradient(135deg, #7C2D12, #EA580C);
+        }
+
+        .floor-zone.entry {
+            background: linear-gradient(135deg, #E5E7EB, #F8FAFC);
+            color: var(--zyvo-text-muted);
+        }
+
+        .sheet-close-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.05);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--zyvo-text-muted);
+        }
+
+        /* Desk Layout Selector Grid */
+        .seat-map-grid-box {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid var(--zyvo-border);
+            border-radius: 14px;
+        }
+
+        .seat-cell {
+            height: 34px;
+            border-radius: 8px;
+            border: 1.5px solid var(--zyvo-border);
+            background: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--zyvo-text-main);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .seat-cell.occupied {
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--zyvo-text-disclaimer);
+            border-color: transparent;
+            pointer-events: none;
+            text-decoration: line-through;
+        }
+
+        .seat-cell.selected {
+            background: var(--zyvo-orange);
+            border-color: var(--zyvo-orange);
+            color: #FFFFFF;
+            box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3);
+        }
+
+        .legends-flex-row {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--zyvo-text-muted);
+        }
+
+        .legend-bullet-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .legend-bullet-color {
+            width: 10px;
+            height: 10px;
+            border-radius: 3px;
+            display: inline-block;
+        }
+
+        .sheet-pricing-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sheet-bottom-action {
+            position: sticky;
+            bottom: -18px;
+            z-index: 5;
+            margin: 0 -18px -18px;
+            padding: 12px 18px calc(18px + env(safe-area-inset-bottom));
+            background: linear-gradient(180deg, rgba(255, 255, 255, .88), #FFFFFF 30%);
+            border-top: 1px solid rgba(20, 20, 24, .06);
+            box-shadow: 0 -12px 24px rgba(15, 15, 18, .06);
+            backdrop-filter: blur(14px);
+        }
+
+        .sheet-bottom-action .btn-reserve-cta {
+            height: 44px;
+            border-radius: 14px;
+            margin-top: 10px;
+        }
+
+        .payment-method-block {
+            margin-top: 12px;
+        }
+
+        .payment-section-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--zyvo-text-muted);
+        }
+
+        .payment-method-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 7px;
+        }
+
+        .payment-option {
+            border: 1px solid rgba(20, 20, 24, .06);
+            border-radius: 13px;
+            padding: 9px 4px;
+            background: #FFFFFF;
+            color: var(--zyvo-text-muted);
+            text-align: center;
+            cursor: pointer;
+            transition: all .2s ease;
+        }
+
+        .payment-option.active {
+            border-color: rgba(249, 115, 22, .32);
+            background: var(--zyvo-orange-soft);
+            color: var(--zyvo-orange);
+            box-shadow: 0 8px 18px rgba(249, 115, 22, .08);
+        }
+
+        .payment-option span {
+            display: block;
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        .payment-option strong {
+            display: block;
+            margin-top: 5px;
+            font-size: 9px;
+            font-weight: 800;
+        }
+
+        .payment-review-card {
+            width: 100%;
+            border-radius: 22px;
+            padding: 18px;
+            background: linear-gradient(180deg, #FFFFFF, #FFF8F2);
+            border: 1px solid rgba(249, 115, 22, .12);
+            box-shadow: 0 16px 36px rgba(15, 15, 18, .08);
+            text-align: left;
+        }
+
+        .payment-review-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .payment-review-top span {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--zyvo-text-disclaimer);
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+
+        .payment-review-total {
+            font-family: 'Outfit', sans-serif;
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--zyvo-orange);
+        }
+
+        .payment-review-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 11px 0;
+            border-top: 1px solid rgba(20, 20, 24, .06);
+            font-size: 12px;
+        }
+
+        .payment-review-row span {
+            color: var(--zyvo-text-muted);
+            font-weight: 700;
+        }
+
+        .payment-review-row strong {
+            color: var(--zyvo-text-main);
+            font-weight: 800;
+            text-align: right;
+        }
+
+        .payment-review-actions {
+            width: 100%;
+            display: grid;
+            gap: 9px;
+            margin-top: 18px;
+        }
+
+        .payment-secondary-btn {
+            width: 100%;
+            height: 42px;
+            border-radius: 13px;
+            border: 1px solid rgba(20, 20, 24, .08);
+            background: #FFFFFF;
+            color: var(--zyvo-text-muted);
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .pricing-box-col {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .pricing-text-val {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--zyvo-orange);
+        }
+
+        .pricing-sub-val {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--zyvo-text-disclaimer);
+        }
+
+        .hours-picker-flex {
+            display: flex;
+            background: rgba(0, 0, 0, 0.03);
+            padding: 3px;
+            border-radius: 8px;
+        }
+
+        .hour-chip-btn {
+            padding: 6px 12px;
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--zyvo-text-muted);
+            transition: all 0.2s ease;
+        }
+
+        .hour-chip-btn.active {
+            background: #FFFFFF;
+            color: var(--zyvo-orange);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Confetti animation inside phone viewport */
+        #phone-confetti-canvas {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1100;
+        }
+
+        /* Booking Confirmation overlay inside phone screen */
+        .booking-receipt-overlay {
+            position: absolute;
+            inset: 0;
+            background: #FFFFFF;
+            z-index: 1090;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            text-align: center;
+            animation: fadeReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeReveal {
+            from {
+                opacity: 0;
+                transform: scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .checkmark-ring {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: rgba(34, 197, 94, 0.08);
+            border: 2px solid var(--zyvo-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--zyvo-green);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.15);
+        }
+
+        .checkmark-ring svg {
+            width: 36px;
+            height: 36px;
+            animation: checkAnim 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s forwards;
+            opacity: 0;
+            transform: scale(0.6);
+        }
+
+        @keyframes checkAnim {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .receipt-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--zyvo-text-main);
+            margin-bottom: 6px;
+        }
+
+        .receipt-subtitle {
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--zyvo-text-muted);
+            margin-bottom: 24px;
+        }
+
+        /* Ticket styling */
+        .digital-ticket-box {
+            width: 100%;
+            background: #FAF9F6;
+            border: 1px solid var(--zyvo-border);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+            margin-bottom: 28px;
+            box-shadow: var(--zyvo-shadow-sm);
+        }
+
+        .digital-ticket-box::before,
+        .digital-ticket-box::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            background: #FFFFFF;
+            border-radius: 50%;
+            border: 1px solid var(--zyvo-border);
+            z-index: 5;
+        }
+
+        .digital-ticket-box::before {
+            left: -8px;
+            border-left-color: transparent;
+        }
+
+        .digital-ticket-box::after {
+            right: -8px;
+            border-right-color: transparent;
+        }
+
+        .ticket-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        .ticket-info-lbl {
+            color: var(--zyvo-text-disclaimer);
+            font-weight: 600;
+        }
+
+        .ticket-info-val {
+            font-weight: 700;
+            color: var(--zyvo-text-main);
+        }
+
+        .ticket-dashed-line {
+            border-top: 1px dashed var(--zyvo-border);
+            margin: 4px 0;
+        }
+
+        /* View Switch Panels */
+        .app-screen-view {
+            display: none;
+        }
+
+        .app-screen-view.active-view {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Map view mockup inside phone */
+        .phone-map-canvas {
+            width: 100%;
+            height: 600px;
+            background: #E8ECEF;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--zyvo-border);
+        }
+
+        .map-glowing-pin {
+            position: absolute;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .map-glowing-pin:hover {
+            transform: scale(1.1) translateY(-2px);
+            z-index: 100;
+        }
+
+        .map-pin-circle {
+            width: 32px;
+            height: 32px;
+            background: rgba(249, 115, 22, 0.2);
+            border: 1px solid rgba(249, 115, 22, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .map-pin-circle::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--zyvo-orange);
+            border: 2px solid #FFFFFF;
+            border-radius: 50%;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .map-pin-lbl {
+            background: #1E1B18;
+            color: #FFFFFF;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 700;
+            margin-top: 4px;
+            white-space: nowrap;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .map-pill-overlay {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            right: 14px;
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+
+        .map-capsule-btn {
+            background: rgba(30, 30, 35, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            pointer-events: auto;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Reservations List Styling */
+        .bookings-empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            text-align: center;
+            gap: 16px;
+            background: #FFFFFF;
+            border-radius: 20px;
+            border: 1px solid var(--zyvo-border);
+            min-height: 250px;
+            box-shadow: var(--zyvo-shadow-sm);
+        }
+
+        .bookings-empty-icon-circle {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(249, 115, 22, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--zyvo-orange);
+        }
+
+        .bookings-empty-icon-circle svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        /* Premium student-first Discover home */
+        #tab-panel-discover {
+            --home-orange: #FF6B00;
+            gap: 15px;
+            padding-left: 16px;
+            padding-right: 16px;
+            background:
+                radial-gradient(circle at 92% 3%, rgba(255, 107, 0, .08), transparent 23%),
+                #FAFAFA;
+        }
+
+        #tab-panel-discover,
+        #tab-panel-discover * {
+            box-sizing: border-box;
+        }
+
+        #tab-panel-discover h2,
+        #tab-panel-discover h3,
+        #tab-panel-discover h4,
+        #tab-panel-discover p {
+            margin: 0;
+        }
+
+        #tab-panel-discover .branding-header {
+            padding: 0;
+        }
+
+        .home-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .home-notification {
+            width: 38px;
+            height: 38px;
+            border: 1px solid rgba(20, 20, 24, .06);
+            border-radius: 13px;
+            background: rgba(255,255,255,.82);
+            color: #29292D;
+            display: grid;
+            place-items: center;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(26,26,32,.055);
+        }
+
+        .home-notification::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 6px;
+            height: 6px;
+            border: 2px solid #FFF;
+            border-radius: 50%;
+            background: var(--home-orange);
+        }
+
+        .home-notification svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        #tab-panel-discover .greeting-area {
+            gap: 4px;
+        }
+
+        #tab-panel-discover .greeting-headline {
+            font-size: 26px;
+            line-height: 1.08;
+            letter-spacing: -.035em;
+        }
+
+        #tab-panel-discover .greeting-subheadline {
+            font-size: 12px;
+            color: #85858D;
+        }
+
+        #tab-panel-discover .location-picker-wrap {
+            max-width: 100%;
+        }
+
+        #tab-panel-discover .location-pin-box {
+            width: 30px;
+            height: 30px;
+            border-radius: 10px;
+        }
+
+        #tab-panel-discover .search-input-field {
+            height: 50px;
+            border-radius: 16px;
+            border-color: rgba(20,20,24,.06);
+            box-shadow: 0 10px 24px rgba(26,26,32,.055);
+        }
+
+        #tab-panel-discover .row-title {
+            font-size: 17px;
+        }
+
+        #tab-panel-discover .row-title-container {
+            margin-top: 3px;
+            margin-bottom: -2px;
+        }
+
+        /* Professional featured study-hall preview */
+        .featured-section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            margin: 3px 2px -3px;
+        }
+
+        .featured-section-heading h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 17px;
+            font-weight: 800;
+            letter-spacing: -.025em;
+            color: #18181B;
+        }
+
+        .featured-section-heading span {
+            color: #929298;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        #tab-panel-discover .premium-featured-card {
+            border: 1px solid rgba(20,20,24,.055);
+            border-radius: 24px;
+            background: #FFF;
+            box-shadow: 0 16px 36px rgba(27,25,23,.09);
+        }
+
+        #tab-panel-discover .premium-featured-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255,107,0,.18);
+            box-shadow: 0 20px 42px rgba(27,25,23,.13);
+        }
+
+        #tab-panel-discover .legacy-featured-card {
+            display: none;
+        }
+
+        #tab-panel-discover .featured-card-image-box {
+            height: 178px;
+            background: #EDE8E3;
+        }
+
+        #tab-panel-discover .featured-card-image-box::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(10,10,12,.04) 30%, rgba(10,10,12,.72) 100%);
+            pointer-events: none;
+        }
+
+        #tab-panel-discover .featured-card-image-box img {
+            object-position: center;
+        }
+
+        .featured-image-topline,
+        .featured-image-bottomline {
+            position: absolute;
+            left: 12px;
+            right: 12px;
+            z-index: 6;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .featured-image-topline {
+            top: 12px;
+        }
+
+        .featured-image-bottomline {
+            bottom: 12px;
+            align-items: end;
+        }
+
+        .verified-space-badge,
+        .space-save-button {
+            border: 1px solid rgba(255,255,255,.2);
+            background: rgba(22,22,25,.58);
+            color: #FFF;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .verified-space-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 8px;
+            border-radius: 999px;
+            font-size: 8px;
+            font-weight: 850;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+        }
+
+        .verified-space-badge svg {
+            width: 11px;
+            height: 11px;
+            color: #FF9D55;
+        }
+
+        .space-save-button {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+        }
+
+        .space-save-button svg {
+            width: 15px;
+            height: 15px;
+        }
+
+        .space-save-button.saved {
+            color: #FF6B00;
+            background: #FFF;
+        }
+
+        .space-save-button.saved svg {
+            fill: currentColor;
+        }
+
+        .image-space-copy strong {
+            display: block;
+            color: #FFF;
+            font-family: 'Outfit', sans-serif;
+            font-size: 17px;
+            letter-spacing: -.02em;
+        }
+
+        .image-space-copy span {
+            display: block;
+            margin-top: 3px;
+            color: rgba(255,255,255,.7);
+            font-size: 9px;
+            font-weight: 600;
+        }
+
+        .image-rating-badge {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 8px;
+            border-radius: 10px;
+            background: rgba(255,255,255,.94);
+            color: #202024;
+            font-size: 9px;
+            font-weight: 850;
+            box-shadow: 0 6px 16px rgba(0,0,0,.14);
+        }
+
+        .image-rating-badge span {
+            color: #FF6B00;
+        }
+
+        #tab-panel-discover .featured-card-body {
+            padding: 14px;
+            gap: 12px;
+        }
+
+        .space-availability-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .availability-copy {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .availability-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22C55E;
+            box-shadow: 0 0 0 5px rgba(34,197,94,.1);
+        }
+
+        .availability-copy strong,
+        .availability-copy small {
+            display: block;
+        }
+
+        .availability-copy strong {
+            color: #202024;
+            font-size: 10px;
+        }
+
+        .availability-copy small {
+            margin-top: 2px;
+            color: #8D8D94;
+            font-size: 8px;
+        }
+
+        .space-price {
+            text-align: right;
+        }
+
+        .space-price strong {
+            display: block;
+            font-family: 'Outfit', sans-serif;
+            color: #18181B;
+            font-size: 17px;
+        }
+
+        .space-price small {
+            display: block;
+            color: #929298;
+            font-size: 8px;
+        }
+
+        #tab-panel-discover .featured-details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            padding: 0;
+            border: 0;
+        }
+
+        #tab-panel-discover .featured-detail-pill {
+            min-width: 0;
+            padding: 8px 9px;
+            border-radius: 11px;
+            background: #F8F8F9;
+            color: #5E5E65;
+            font-size: 9px;
+        }
+
+        .featured-booking-footer {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 9px;
+            align-items: center;
+        }
+
+        .space-detail-button {
+            height: 40px;
+            padding: 0 13px;
+            border: 1px solid rgba(20,20,24,.08);
+            border-radius: 12px;
+            background: #FFF;
+            color: #343439;
+            font-family: inherit;
+            font-size: 9px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        #tab-panel-discover .btn-reserve-cta {
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #FF7A1A, #FF5A00);
+            font-size: 10px;
+            box-shadow: 0 8px 18px rgba(255,90,0,.24);
+        }
+
+        /* Premium Campus ID profile experience */
+        #tab-panel-profile {
+            --profile-orange: #FF6B00;
+            gap: 14px;
+            padding-left: 16px;
+            padding-right: 16px;
+            background:
+                radial-gradient(circle at 95% 4%, rgba(255, 107, 0, 0.09), transparent 24%),
+                #FAFAFA;
+        }
+
+        .profile-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .profile-page-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 23px;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            color: #111114;
+        }
+
+        .profile-top-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .profile-icon-button {
+            width: 38px;
+            height: 38px;
+            border: 1px solid rgba(20, 20, 24, 0.06);
+            border-radius: 13px;
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(16px);
+            color: #25252A;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            box-shadow: 0 7px 18px rgba(28, 28, 35, 0.05);
+            transition: transform .2s ease, background .2s ease, color .2s ease;
+        }
+
+        .profile-icon-button:hover {
+            transform: translateY(-2px);
+            background: #FFFFFF;
+            color: var(--profile-orange);
+        }
+
+        .profile-icon-button svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .profile-notification-button {
+            position: relative;
+        }
+
+        .profile-notification-button::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            border: 2px solid #FFF;
+            background: var(--profile-orange);
+        }
+
+        .campus-id-card {
+            position: relative;
+            overflow: hidden;
+            padding: 18px;
+            border-radius: 24px;
+            color: #FFF;
+            background:
+                radial-gradient(circle at 85% 10%, rgba(255, 174, 92, .42), transparent 26%),
+                linear-gradient(145deg, #161619 0%, #242126 58%, #3B2417 100%);
+            box-shadow: 0 18px 36px rgba(28, 22, 18, .18);
+        }
+
+        .campus-id-card::before {
+            content: '';
+            position: absolute;
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            right: -80px;
+            bottom: -110px;
+            border: 24px solid rgba(255, 107, 0, .15);
+        }
+
+        .campus-id-brand {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .62);
+        }
+
+        .campus-id-chip {
+            width: 29px;
+            height: 22px;
+            border-radius: 7px;
+            background: linear-gradient(135deg, #FFB15C, #FF6B00);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,.24);
+        }
+
+        .campus-id-main {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .verified-avatar-ring {
+            width: 86px;
+            height: 86px;
+            padding: 3px;
+            flex: 0 0 auto;
+            border-radius: 50%;
+            background: linear-gradient(140deg, #FFB15C, #FF6B00 65%, #FF3D00);
+            box-shadow: 0 8px 22px rgba(255, 107, 0, .32);
+            position: relative;
+        }
+
+        .verified-avatar-ring img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #1C1B1E;
+        }
+
+        .avatar-verified-mark {
+            position: absolute;
+            right: -1px;
+            bottom: 2px;
+            width: 24px;
+            height: 24px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--profile-orange);
+            border: 3px solid #222024;
+            color: #FFF;
+        }
+
+        .avatar-verified-mark svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .campus-profile-copy {
+            min-width: 0;
+        }
+
+        .campus-name-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .campus-student-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -.03em;
+        }
+
+        .verified-text-badge {
+            padding: 3px 6px;
+            border-radius: 999px;
+            background: rgba(255, 107, 0, .17);
+            color: #FF9C52;
+            font-size: 8px;
+            font-weight: 800;
+            letter-spacing: .05em;
+        }
+
+        .campus-student-role {
+            margin-top: 3px;
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(255,255,255,.72);
+        }
+
+        .campus-meta {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 7px;
+            font-size: 10px;
+            color: rgba(255,255,255,.54);
+        }
+
+        .achievement-strip {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 7px;
+            margin-top: 16px;
+        }
+
+        .achievement-mini {
+            min-width: 0;
+            padding: 9px 5px;
+            border-radius: 14px;
+            text-align: center;
+            background: rgba(255,255,255,.075);
+            border: 1px solid rgba(255,255,255,.08);
+            backdrop-filter: blur(12px);
+        }
+
+        .achievement-mini-icon {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+
+        .achievement-mini strong {
+            display: block;
+            font-size: 10px;
+            color: #FFF;
+            white-space: nowrap;
+        }
+
+        .achievement-mini small {
+            display: block;
+            margin-top: 2px;
+            color: rgba(255,255,255,.45);
+            font-size: 7px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .profile-section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            margin: 2px 2px 0;
+        }
+
+        .profile-section-heading h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: -.02em;
+            color: #18181B;
+        }
+
+        .profile-section-heading span {
+            color: #8A8A92;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .profile-stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .profile-stat-card {
+            position: relative;
+            overflow: hidden;
+            min-height: 82px;
+            padding: 12px;
+            border: 1px solid rgba(20,20,24,.055);
+            border-radius: 19px;
+            background: linear-gradient(145deg, #FFF, #FBFBFC);
+            box-shadow: 0 10px 24px rgba(26, 26, 32, .055);
+            transition: transform .22s ease, box-shadow .22s ease;
+        }
+
+        .profile-stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 28px rgba(26, 26, 32, .09);
+        }
+
+        .profile-stat-card::after {
+            content: '';
+            position: absolute;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            right: -20px;
+            top: -20px;
+            background: rgba(255,107,0,.055);
+        }
+
+        .stat-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-icon-box {
+            width: 28px;
+            height: 28px;
+            border-radius: 9px;
+            display: grid;
+            place-items: center;
+            color: var(--profile-orange);
+            background: linear-gradient(145deg, #FFF4EA, #FFE8D5);
+        }
+
+        .stat-icon-box svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .stat-change {
+            font-size: 8px;
+            font-weight: 800;
+            color: #16A34A;
+        }
+
+        .stat-value {
+            display: block;
+            margin-top: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -.025em;
+            color: #18181B;
+        }
+
+        .stat-label {
+            display: block;
+            margin-top: 1px;
+            color: #8A8A92;
+            font-size: 9px;
+            font-weight: 650;
+        }
+
+        .profile-wallet-card {
+            position: relative;
+            overflow: hidden;
+            padding: 17px;
+            border-radius: 24px;
+            color: #FFF;
+            background: linear-gradient(135deg, #FF7A18 0%, #FF5A00 58%, #F04400 100%);
+            box-shadow: 0 16px 32px rgba(255, 89, 0, .25);
+        }
+
+        .profile-wallet-card::after {
+            content: 'ZYVO';
+            position: absolute;
+            right: -7px;
+            bottom: -19px;
+            color: rgba(255,255,255,.1);
+            font-family: 'Outfit', sans-serif;
+            font-size: 66px;
+            font-weight: 800;
+            letter-spacing: -.08em;
+        }
+
+        .wallet-top,
+        .wallet-bottom {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .wallet-eyebrow {
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.7);
+        }
+
+        .wallet-balance {
+            margin-top: 4px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: -.035em;
+        }
+
+        .wallet-card-icon {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            background: rgba(255,255,255,.16);
+            border: 1px solid rgba(255,255,255,.18);
+            backdrop-filter: blur(10px);
+        }
+
+        .wallet-card-icon svg {
+            width: 21px;
+            height: 21px;
+        }
+
+        .wallet-bottom {
+            margin-top: 14px;
+        }
+
+        .wallet-caption {
+            font-size: 9px;
+            color: rgba(255,255,255,.72);
+        }
+
+        .wallet-earn-button {
+            border: 0;
+            border-radius: 11px;
+            padding: 9px 12px;
+            color: #D94D00;
+            background: #FFF;
+            font-family: inherit;
+            font-size: 9px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 6px 16px rgba(140,49,0,.18);
+            transition: transform .2s ease;
+        }
+
+        .wallet-earn-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .profile-premium-card,
+        .profile-progress-card,
+        .profile-activity-card {
+            padding: 15px;
+            border-radius: 22px;
+            border: 1px solid rgba(20,20,24,.055);
+            background: rgba(255,255,255,.86);
+            box-shadow: 0 10px 26px rgba(25,25,31,.055);
+            backdrop-filter: blur(16px);
+        }
+
+        .premium-card-top {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .premium-badge-icon {
+            width: 40px;
+            height: 40px;
+            flex: 0 0 auto;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            color: #8B5200;
+            background: linear-gradient(145deg, #FFF2B9, #FFC94D);
+            box-shadow: 0 8px 18px rgba(230,170,24,.18);
+        }
+
+        .premium-badge-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .premium-copy {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .premium-title-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .premium-title-row strong {
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            color: #18181B;
+        }
+
+        .active-status-pill {
+            padding: 3px 6px;
+            border-radius: 999px;
+            color: #15803D;
+            background: #DCFCE7;
+            font-size: 7px;
+            font-weight: 900;
+            letter-spacing: .06em;
+        }
+
+        .premium-copy p {
+            margin-top: 3px;
+            color: #85858D;
+            font-size: 9px;
+            line-height: 1.4;
+        }
+
+        .premium-upgrade-button {
+            border: 0;
+            border-radius: 10px;
+            padding: 8px 10px;
+            background: #1C1C20;
+            color: #FFF;
+            font-family: inherit;
+            font-size: 8px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .premium-benefits {
+            display: flex;
+            gap: 6px;
+            margin-top: 12px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .premium-benefit {
+            flex: 0 0 auto;
+            padding: 6px 8px;
+            border-radius: 9px;
+            color: #6B4C10;
+            background: #FFF9E7;
+            border: 1px solid #F8EAC0;
+            font-size: 8px;
+            font-weight: 750;
+        }
+
+        .progress-card-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .progress-card-head strong {
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            color: #18181B;
+        }
+
+        .progress-card-head span {
+            color: var(--profile-orange);
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .progress-card-caption {
+            margin-top: 4px;
+            color: #8A8A92;
+            font-size: 9px;
+        }
+
+        .weekly-progress-track {
+            height: 9px;
+            margin-top: 12px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: #F0F0F2;
+        }
+
+        .weekly-progress-fill {
+            width: 0;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #FF8A31, #FF5A00);
+            box-shadow: 0 4px 10px rgba(255,107,0,.28);
+            transition: width 1.1s cubic-bezier(.16, 1, .3, 1);
+        }
+
+        #tab-panel-profile.active-view .weekly-progress-fill {
+            width: 80%;
+        }
+
+        .progress-days {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 9px;
+            color: #A2A2A8;
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .progress-days .done {
+            color: var(--profile-orange);
+        }
+
+        .profile-activity-card {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .activity-row {
+            position: relative;
+            display: grid;
+            grid-template-columns: 30px 1fr auto;
+            align-items: center;
+            gap: 9px;
+            min-height: 48px;
+        }
+
+        .activity-row:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 14px;
+            top: 37px;
+            bottom: -11px;
+            width: 1px;
+            background: #ECECEF;
+        }
+
+        .activity-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            color: var(--profile-orange);
+            background: #FFF2E8;
+            z-index: 1;
+        }
+
+        .activity-icon svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .activity-copy strong {
+            display: block;
+            color: #2A2A2E;
+            font-size: 10px;
+        }
+
+        .activity-copy small,
+        .activity-time {
+            color: #9A9AA1;
+            font-size: 8px;
+        }
+
+        .profile-quick-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .quick-action-button {
+            min-width: 0;
+            border: 1px solid rgba(20,20,24,.055);
+            border-radius: 16px;
+            padding: 10px 4px;
+            background: #FFF;
+            color: #29292E;
+            font-family: inherit;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(26,26,32,.045);
+            transition: transform .2s ease, color .2s ease, border-color .2s ease;
+        }
+
+        .quick-action-button:hover {
+            transform: translateY(-3px);
+            color: var(--profile-orange);
+            border-color: rgba(255,107,0,.2);
+        }
+
+        .quick-action-icon {
+            width: 31px;
+            height: 31px;
+            margin: 0 auto 6px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            color: var(--profile-orange);
+            background: linear-gradient(145deg, #FFF6EF, #FFEBDD);
+        }
+
+        .quick-action-icon svg {
+            width: 15px;
+            height: 15px;
+        }
+
+        .quick-action-button span:last-child {
+            display: block;
+            font-size: 7.5px;
+            font-weight: 800;
+            line-height: 1.25;
+        }
+
+        .profile-toast {
+            position: fixed;
+            left: 50%;
+            bottom: 92px;
+            z-index: 1400;
+            transform: translate(-50%, 18px);
+            opacity: 0;
+            pointer-events: none;
+            padding: 9px 13px;
+            border-radius: 999px;
+            background: rgba(25,25,28,.92);
+            color: #FFF;
+            font-size: 9px;
+            font-weight: 700;
+            backdrop-filter: blur(14px);
+            transition: opacity .22s ease, transform .22s ease;
+        }
+
+        .profile-toast.show {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        /* Profile rendering guard: keeps the redesigned screen styled even if
+           older project styles load with more specific layout declarations. */
+        #tab-panel-profile.active-view {
+            display: flex !important;
+            flex-direction: column;
+            gap: 14px !important;
+        }
+
+        #tab-panel-profile,
+        #tab-panel-profile * {
+            box-sizing: border-box;
+        }
+
+        #tab-panel-profile h2,
+        #tab-panel-profile h3,
+        #tab-panel-profile p,
+        #tab-panel-profile strong,
+        #tab-panel-profile small {
+            margin: 0;
+        }
+
+        /* ZYVO Brand Splash Launch Screen Styles */
+        .app-splash-screen {
+            position: absolute;
+            inset: 0;
+            background: #FAF9F6;
+            /* Warm off-white background as requested */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            z-index: 1200;
+            opacity: 1;
+            pointer-events: auto;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .app-splash-screen.hidden {
+            opacity: 0;
+            transform: scale(1.03);
+            pointer-events: none;
+        }
+
+        .splash-brand-logo-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: logoReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        @keyframes logoReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .splash-tagline-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.16em;
+            color: #0A1B3A;
+            /* Deep navy blue tagline */
+            text-transform: uppercase;
+            opacity: 0;
+            margin-top: 8px;
+            animation: taglineReveal 1.2s ease-out 0.4s forwards;
+        }
+
+        @keyframes taglineReveal {
+            to {
+                opacity: 0.95;
+            }
+        }
+
+        /* ZYVO Onboarding Page 1 Panel overlay styles */
+        .app-onboarding-panel {
+            position: absolute;
+            inset: 0;
+            background: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            padding: 44px 0 0 0;
+            z-index: 1100;
+            opacity: 1;
+            pointer-events: auto;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .app-onboarding-panel.hidden {
+            opacity: 0;
+            transform: translateX(-100%);
+            pointer-events: none;
+        }
+
+        .brand-center-header {
+            width: 100%;
+            text-align: center;
+            padding: 18px 0 6px 0;
+            z-index: 10;
+        }
+
+        .brand-center-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            color: var(--zyvo-navy, #0A1B3A);
+        }
+
+        .onboard-slider-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .onboard-slide-track {
+            display: flex;
+            height: 100%;
+            width: 300%;
+            /* 3 slides */
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .onboard-slide {
+            width: 33.3333%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 0 24px;
+            align-items: center;
+        }
+
+        .onboard-graphic-box {
+            width: 100%;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-top: 10px;
+        }
+
+        /* Concentric rings animation for central building pin */
+        .map-pulse-ring-1 {
+            animation: mapPulse 2.4s infinite linear;
+            transform-origin: 160px 135px;
+        }
+
+        .map-pulse-ring-2 {
+            animation: mapPulse 2.4s infinite linear 0.8s;
+            transform-origin: 160px 135px;
+        }
+
+        .map-pulse-ring-3 {
+            animation: mapPulse 2.4s infinite linear 1.6s;
+            transform-origin: 160px 135px;
+        }
+
+        @keyframes mapPulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.85;
+            }
+
+            100% {
+                transform: scale(2.4);
+                opacity: 0;
+            }
+        }
+
+        .onboard-text-box {
+            text-align: center;
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .onboard-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 27px;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            color: var(--zyvo-navy, #0A1B3A);
+        }
+
+        .onboard-desc {
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 1.6;
+            color: var(--zyvo-text-muted, #52525B);
+            max-width: 310px;
+            margin: 0 auto;
+        }
+
+        .onboard-pagination-row {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .onboard-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--zyvo-gray-dot, #D4D4D8);
+            border: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .onboard-dot.active {
+            background: var(--zyvo-orange, #F97316);
+            width: 22px;
+            border-radius: 4px;
+        }
+
+        .onboard-skip-link {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--zyvo-navy, #0A1B3A);
+            background: none;
+            border: none;
+            font-family: inherit;
+            cursor: pointer;
+            text-align: center;
+            margin: 18px auto 0 auto;
+            padding: 4px 12px;
+            display: block;
+            transition: opacity 0.2s ease;
+        }
+
+        .onboard-skip-link:hover {
+            opacity: 0.75;
+        }
+
+        .onboard-sign-in-prompt {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--zyvo-navy, #0A1B3A);
+            text-align: center;
+            margin: 18px auto 0 auto;
+            display: block;
+            cursor: pointer;
+        }
+
+        .onboard-sign-in-prompt span {
+            color: var(--zyvo-orange, #F97316);
+            text-decoration: underline;
+        }
+
+        .onboard-footer-btn-box {
+            padding: 16px 24px 34px 24px;
+            /* Generous bottom spacing for home indicator */
+            background: #FFFFFF;
+        }
+
+        .btn-onboard-next {
+            width: 100%;
+            height: 52px;
+            background: var(--zyvo-orange-gradient, linear-gradient(135deg, #F97316 0%, #FB923C 100%));
+            color: #FFFFFF;
+            border: none;
+            border-radius: 26px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 14px rgba(249, 115, 22, 0.28);
+            transition: all 0.25s ease;
+        }
+
+        .btn-onboard-next:hover {
+            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.38);
+            transform: translateY(-0.5px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Simulated iOS Hardware Bezel Enclosure Frame -->
+    <div class="iphone-canvas">
+
+        <!-- ZYVO Brand Splash Launch Screen Overlay (Fades out on load) -->
+        <div class="app-splash-screen" id="app-splash">
+            <!-- Brand logo wordmark with Z, V, O in Deep Navy and Y in Orange with sharp elongated tail -->
+            <div class="splash-brand-logo-row">
+                <svg width="185" height="65" viewBox="0 0 185 65" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Z (Deep Navy) -->
+                    <path d="M15 15H42V23L23 47H42V55H15V47L34 23H15V15Z" fill="#0A1B3A" />
+                    <!-- Y (Orange, unique elongated pointed stem) -->
+                    <path d="M48 15H58L66 29L74 15H84L71 34V45H76L66 57L56 45H61V34L48 15Z" fill="#F97316" />
+                    <!-- V (Deep Navy) -->
+                    <path d="M90 15H100L108 43L116 15H126L113 55H103L90 15Z" fill="#0A1B3A" />
+                    <!-- O (Deep Navy) -->
+                    <path
+                        d="M152 15C163 15 172 24 172 35C172 46 163 55 152 55C141 55 132 46 132 35C132 24 141 15 152 15ZM152 23C145 23 140 28 140 35C140 42 145 47 152 47C159 47 164 42 164 35C164 28 159 23 152 23Z"
+                        fill="#0A1B3A" />
+                </svg>
+            </div>
+
+            <!-- Tagline in Deep Navy -->
+            <div class="splash-tagline-text">STUDY SPACES. DISCOVERED.</div>
+        </div>
+
+        <!-- ZYVO Onboarding Carousel Panel overlay (Slides left and fades out when completed) -->
+        <div class="app-onboarding-panel" id="app-onboarding">
+            <!-- Centered Logo Brand Header -->
+            <header class="brand-center-header">
+                <h1 class="brand-center-title">ZYVO</h1>
+            </header>
+
+            <!-- Carousel Track Container -->
+            <div class="onboard-slider-container">
+                <div class="onboard-slide-track" id="onb-slide-track-id">
+
+                    <!-- SLIDE 1: City Map -->
+                    <div class="onboard-slide">
+                        <div class="onboard-graphic-box">
+                            <svg width="320" height="200" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="onb1OrangeCylinder" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#FB923C" />
+                                        <stop offset="100%" stop-color="#EA580C" />
+                                    </linearGradient>
+                                    <linearGradient id="onb1LeftWall" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#38BDF8" />
+                                        <stop offset="100%" stop-color="#0284C7" />
+                                    </linearGradient>
+                                    <linearGradient id="onb1RightWall" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#0284C7" />
+                                        <stop offset="100%" stop-color="#0369A1" />
+                                    </linearGradient>
+                                </defs>
+
+                                <!-- Streets grid layout -->
+                                <path d="M-50,50 L350,250 M-50,100 L350,300 M-50,0 L350,200" stroke="#F1F5F9"
+                                    stroke-width="2.5" />
+                                <path d="M350,50 L-50,250 M350,100 L-50,300 M350,0 L-50,200" stroke="#F1F5F9"
+                                    stroke-width="2.5" />
+
+                                <!-- Stylized green trees -->
+                                <g transform="translate(100, 140)">
+                                    <line x1="0" y1="0" x2="0" y2="-12" stroke="#64748B" stroke-width="1.5" />
+                                    <circle cx="0" cy="-12" r="6" fill="#16A34A" />
+                                    <circle cx="0" cy="-17" r="4" fill="#4ADE80" />
+                                </g>
+                                <g transform="translate(220, 150)">
+                                    <line x1="0" y1="0" x2="0" y2="-12" stroke="#64748B" stroke-width="1.5" />
+                                    <circle cx="0" cy="-12" r="6" fill="#16A34A" />
+                                    <circle cx="0" cy="-17" r="4" fill="#4ADE80" />
+                                </g>
+                                <g transform="translate(130, 80)">
+                                    <line x1="0" y1="0" x2="0" y2="-10" stroke="#64748B" stroke-width="1.5" />
+                                    <circle cx="0" cy="-10" r="5" fill="#15803D" />
+                                    <circle cx="0" cy="-14" r="3.5" fill="#22C55E" />
+                                </g>
+
+                                <!-- Left Building block -->
+                                <g transform="translate(60, 90)">
+                                    <path d="M0,20 L15,27.5 V50 L0,42.5 Z" fill="url(#onb1LeftWall)" />
+                                    <path d="M15,27.5 L30,20 V42.5 L15,50 Z" fill="url(#onb1RightWall)" />
+                                    <path d="M0,20 L15,12.5 L30,20 L15,27.5 Z" fill="#E0F2FE" />
+                                </g>
+
+                                <!-- Right Building block -->
+                                <g transform="translate(230, 80)">
+                                    <path d="M0,25 L18,34 V60 L0,51 Z" fill="url(#onb1LeftWall)" />
+                                    <path d="M18,34 L36,25 V51 L18,60 Z" fill="url(#onb1RightWall)" />
+                                    <path d="M0,25 L18,16 L36,25 L18,34 Z" fill="#E0F2FE" />
+                                </g>
+
+                                <!-- Concentric orange pulsing rings -->
+                                <ellipse cx="160" cy="135" rx="30" ry="15" stroke="#F97316" stroke-width="1.5"
+                                    fill="none" class="map-pulse-ring-1" />
+                                <ellipse cx="160" cy="135" rx="30" ry="15" stroke="#F97316" stroke-width="1.5"
+                                    fill="none" class="map-pulse-ring-2" />
+                                <ellipse cx="160" cy="135" rx="30" ry="15" stroke="#F97316" stroke-width="1.5"
+                                    fill="none" class="map-pulse-ring-3" />
+
+                                <!-- Central Circular Orange Building (Isometric Cylinder) -->
+                                <g transform="translate(135, 110)">
+                                    <path d="M0,25 A25,12.5 0 0,0 50,25 V45 A25,12.5 0 0,1 0,45 Z"
+                                        fill="url(#onb1OrangeCylinder)" />
+                                    <ellipse cx="25" cy="25" rx="25" ry="12.5" fill="#FFC399" />
+                                </g>
+
+                                <!-- Small map location pins -->
+                                <g transform="translate(75, 85) scale(0.7)">
+                                    <path
+                                        d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22S19 14.25 19 9C19 5.13 15.87 2 12 2Z"
+                                        fill="#94A3B8" />
+                                    <circle cx="12" cy="9" r="3.5" fill="#FFFFFF" />
+                                </g>
+                                <g transform="translate(248, 77) scale(0.7)">
+                                    <path
+                                        d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22S19 14.25 19 9C19 5.13 15.87 2 12 2Z"
+                                        fill="#94A3B8" />
+                                    <circle cx="12" cy="9" r="3.5" fill="#FFFFFF" />
+                                </g>
+
+                                <!-- Large Central Location Pin -->
+                                <g transform="translate(148, 93) scale(1.1)">
+                                    <ellipse cx="11" cy="21" rx="4" ry="1.5" fill="rgba(0,0,0,0.15)" />
+                                    <path
+                                        d="M11 2C7.13 2 4 5.13 4 9C4 14.25 11 22 11 22S18 14.25 18 9C18 5.13 14.87 2 11 2Z"
+                                        fill="#F97316" stroke="#FFFFFF" stroke-width="1" />
+                                    <circle cx="11" cy="9" r="3" fill="#FFFFFF" />
+                                </g>
+                            </svg>
+                        </div>
+
+                        <!-- Text section below map graphic -->
+                        <div class="onboard-text-box">
+                            <h2 class="onboard-title">Discover study<br>spaces near you.</h2>
+                            <p class="onboard-desc">Quiet corners, bright cafés, and focused libraries — all on one map.
+                            </p>
+
+                            <!-- Pagination indicator -->
+                            <div class="onboard-pagination-row">
+                                <span class="onboard-dot active" onclick="scrollOnboardingSlide(0)"></span>
+                                <span class="onboard-dot" onclick="scrollOnboardingSlide(1)"></span>
+                                <span class="onboard-dot" onclick="scrollOnboardingSlide(2)"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 2: Desk layout -->
+                    <div class="onboard-slide">
+                        <div class="onboard-graphic-box">
+                            <svg width="320" height="200" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="20" y="20" width="280" height="160" rx="14" fill="#FAF9F6" stroke="#E2E8F0"
+                                    stroke-width="1.5" />
+
+                                <text x="160" y="45" font-family="'Outfit'" font-size="12" font-weight="700"
+                                    fill="var(--zyvo-navy)" text-anchor="middle" letter-spacing="0.08em">KALYAN READING
+                                    ROOM</text>
+
+                                <rect x="50" y="70" width="40" height="30" rx="6" fill="#F1F5F9" stroke="#CBD5E1" />
+                                <rect x="110" y="70" width="40" height="30" rx="6" fill="#F97316" stroke="#EA580C"
+                                    style="filter: drop-shadow(0 2px 8px rgba(249, 115, 22, 0.25));" />
+                                <rect x="170" y="70" width="40" height="30" rx="6" fill="#F1F5F9" stroke="#CBD5E1" />
+                                <rect x="230" y="70" width="40" height="30" rx="6" fill="#E2E8F0" stroke="#CBD5E1" />
+
+                                <rect x="50" y="120" width="40" height="30" rx="6" fill="#E2E8F0" stroke="#CBD5E1" />
+                                <rect x="110" y="120" width="40" height="30" rx="6" fill="#F1F5F9" stroke="#CBD5E1" />
+                                <rect x="170" y="120" width="40" height="30" rx="6" fill="#F1F5F9" stroke="#CBD5E1" />
+                                <rect x="230" y="120" width="40" height="30" rx="6" fill="#F97316" stroke="#EA580C"
+                                    style="filter: drop-shadow(0 2px 8px rgba(249, 115, 22, 0.25));" />
+
+                                <text x="130" y="88" font-family="'Inter'" font-size="11" font-weight="700"
+                                    fill="#FFFFFF" text-anchor="middle">A-2</text>
+                                <text x="250" y="138" font-family="'Inter'" font-size="11" font-weight="700"
+                                    fill="#FFFFFF" text-anchor="middle">B-4</text>
+                            </svg>
+                        </div>
+
+                        <div class="onboard-text-box">
+                            <h2 class="onboard-title">Select your desk.</h2>
+                            <p class="onboard-desc">Select your desk on a live floor layout, book ahead, and guarantee
+                                your focus spot.</p>
+
+                            <div class="onboard-pagination-row">
+                                <span class="onboard-dot" onclick="scrollOnboardingSlide(0)"></span>
+                                <span class="onboard-dot active" onclick="scrollOnboardingSlide(1)"></span>
+                                <span class="onboard-dot" onclick="scrollOnboardingSlide(2)"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 3: Onboarding Page 3 (Calendar & Choose Time) -->
+                    <div class="onboard-slide">
+                        <div class="onboard-graphic-box">
+                            <svg width="320" height="220" viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Background circle & dots -->
+                                <circle cx="160" cy="110" r="76" stroke="#F1F5F9" stroke-width="1.5" fill="none" />
+
+                                <g fill="#E2E8F0">
+                                    <circle cx="260" cy="40" r="1.5" />
+                                    <circle cx="268" cy="40" r="1.5" />
+                                    <circle cx="276" cy="40" r="1.5" />
+                                    <circle cx="260" cy="48" r="1.5" />
+                                    <circle cx="268" cy="48" r="1.5" />
+                                    <circle cx="276" cy="48" r="1.5" />
+                                    <circle cx="260" cy="56" r="1.5" />
+                                    <circle cx="268" cy="56" r="1.5" />
+                                    <circle cx="276" cy="56" r="1.5" />
+                                </g>
+
+                                <!-- Calendar Card -->
+                                <rect x="42" y="25" width="176" height="126" rx="12" fill="#FFFFFF" stroke="#0A1B3A"
+                                    stroke-width="2" style="filter: drop-shadow(0 8px 16px rgba(10,27,58,0.03));" />
+
+                                <g font-family="'Inter'" font-size="6" font-weight="800" fill="#0A1B3A"
+                                    text-anchor="middle">
+                                    <text x="58" y="42">MON</text>
+                                    <text x="81" y="42">TUE</text>
+                                    <text x="104" y="42">WED</text>
+                                    <text x="127" y="42">THU</text>
+                                    <text x="150" y="42">FRI</text>
+                                    <text x="173" y="42">SAT</text>
+                                    <text x="196" y="42">SUN</text>
+                                </g>
+
+                                <g font-family="'Inter'" font-size="8" font-weight="600" fill="#94A3B8"
+                                    text-anchor="middle">
+                                    <!-- Row 1 -->
+                                    <text x="58" y="60">1</text> <text x="81" y="60">2</text> <text x="104"
+                                        y="60">3</text>
+                                    <text x="127" y="60">4</text> <text x="150" y="60">5</text> <text x="173"
+                                        y="60">6</text>
+                                    <text x="196" y="60">7</text>
+
+                                    <!-- Row 2 -->
+                                    <text x="58" y="78">8</text> <text x="81" y="78">9</text> <text x="104"
+                                        y="78">10</text>
+                                    <text x="127" y="78">11</text> <text x="150" y="78">12</text> <text x="173"
+                                        y="78">13</text>
+                                    <text x="196" y="78">14</text>
+
+                                    <!-- Row 3 -->
+                                    <text x="58" y="96">15</text> <text x="81" y="96">16</text> <text x="104"
+                                        y="96">17</text>
+                                    <text x="127" y="96">18</text> <text x="150" y="96">19</text> <text x="173"
+                                        y="96">20</text>
+
+                                    <!-- 21 is highlighted in Orange Circle -->
+                                    <circle cx="196" cy="93" r="10" fill="#F97316" />
+                                    <text x="196" y="96" fill="#FFFFFF" font-weight="800">21</text>
+
+                                    <!-- Row 4 -->
+                                    <text x="58" y="114">22</text> <text x="81" y="114">23</text> <text x="104"
+                                        y="114">24</text>
+                                    <text x="127" y="114">25</text> <text x="150" y="114">26</text> <text x="173"
+                                        y="114">27</text>
+                                    <text x="196" y="114">28</text>
+
+                                    <!-- Row 5 -->
+                                    <text x="58" y="132">29</text> <text x="81" y="132">30</text> <text x="104"
+                                        y="132">31</text>
+                                </g>
+
+                                <!-- Choose Time Interface Card -->
+                                <g filter="drop-shadow(0 12px 24px rgba(10,27,58,0.1))">
+                                    <rect x="110" y="95" width="156" height="74" rx="12" fill="#FFFFFF" stroke="#0A1B3A"
+                                        stroke-width="2" />
+                                    <text x="124" y="114" font-family="'Inter'" font-size="9" font-weight="700"
+                                        fill="#0A1B3A">Choose time</text>
+
+                                    <!-- 9:00 -->
+                                    <rect x="124" y="124" width="34" height="20" rx="6" fill="#FFFFFF" stroke="#0A1B3A"
+                                        stroke-width="1.5" />
+                                    <text x="141" y="137" font-family="'Inter'" font-size="8" font-weight="700"
+                                        fill="#0A1B3A" text-anchor="middle">9:00</text>
+
+                                    <!-- 10:00 -->
+                                    <rect x="164" y="124" width="38" height="20" rx="6" fill="#FFFFFF" stroke="#0A1B3A"
+                                        stroke-width="1.5" />
+                                    <text x="183" y="137" font-family="'Inter'" font-size="8" font-weight="700"
+                                        fill="#0A1B3A" text-anchor="middle">10:00</text>
+
+                                    <!-- 11:00 (Highlighted) -->
+                                    <rect x="208" y="124" width="38" height="20" rx="6" fill="#F97316" stroke="#0A1B3A"
+                                        stroke-width="1.5" />
+                                    <text x="227" y="137" font-family="'Inter'" font-size="8" font-weight="800"
+                                        fill="#0A1B3A" text-anchor="middle">11:00</text>
+
+                                    <!-- Checkmark Badge -->
+                                    <circle cx="266" cy="132" r="10" fill="#F97316" stroke="#0A1B3A" stroke-width="2" />
+                                    <path d="M263 132 L265 134 L269 130" stroke="#FFFFFF" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                                </g>
+                            </svg>
+                        </div>
+
+                        <div class="onboard-text-box">
+                            <h2 class="onboard-title">Reserve in seconds.</h2>
+                            <p class="onboard-desc">Lock in your favorite spot and<br>just show up to focus.</p>
+
+                            <div class="onboard-pagination-row">
+                                <span class="onboard-dot" onclick="scrollOnboardingSlide(0)"></span>
+                                <span class="onboard-dot" onclick="scrollOnboardingSlide(1)"></span>
+                                <span class="onboard-dot active" onclick="scrollOnboardingSlide(2)"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Action Button at Bottom -->
+            <footer class="onboard-footer-btn-box">
+                <button class="btn-onboard-next" id="onb-next-btn-id" onclick="handleOnboardingNext()">Next</button>
+                <div class="onboard-footer-subtext" id="onb-footer-subtext-id" onclick="handleOnboardingSubtextClick()"
+                    style="font-size: 13px; font-weight: 700; color: var(--zyvo-navy, #0A1B3A); text-align: center; margin-top: 16px; cursor: pointer; transition: opacity 0.2s ease; font-family: inherit;">
+                    Skip
+                </div>
+            </footer>
+        </div>
+
+        <!-- iPhone Bezel Notch/Dynamic Island -->
+        <div class="iphone-notch" id="dynamic-island-cutout"></div>
+
+        <!-- iOS Bottom Home Indicator Bar -->
+        <div class="home-indicator-bar"></div>
+
+        <!-- Active view success receipt screen overlay -->
+        <div class="booking-receipt-overlay" id="receipt-overlay">
+            <div class="checkmark-ring">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+                    <polyline points="20 6 9 17 4 12" />
+                </svg>
+            </div>
+
+            <h3 class="receipt-title">Seat Reserved!</h3>
+            <p class="receipt-subtitle">Your study session has been secured. Scan your ticket code at the entrance desk.
+            </p>
+
+            <div class="digital-ticket-box">
+                <div class="ticket-info-row">
+                    <span class="ticket-info-lbl">SPACE</span>
+                    <span class="ticket-info-val" id="receipt-space-name">Kalyan Reading Room</span>
+                </div>
+                <div class="ticket-info-row">
+                    <span class="ticket-info-lbl">DESK</span>
+                    <span class="ticket-info-val" id="receipt-desk-id">Desk A-12</span>
+                </div>
+                <div class="ticket-dashed-line"></div>
+                <div class="ticket-info-row">
+                    <span class="ticket-info-lbl">DURATION</span>
+                    <span class="ticket-info-val" id="receipt-duration">2 Hours</span>
+                </div>
+                <div class="ticket-info-row">
+                    <span class="ticket-info-lbl">TICKET CODE</span>
+                    <span class="ticket-info-val"
+                        style="color:var(--zyvo-orange); font-family:monospace; font-size:14px;">ZYV-9582-F</span>
+                </div>
+            </div>
+
+            <button class="btn-reserve-cta" onclick="dismissReceiptOverlay()">
+                Back to Home Feed
+            </button>
+        </div>
+
+        <!-- iOS Bottom Sheet (Reservation Seat Picker Modal) -->
+        <div class="booking-sheet-backdrop" id="sheet-backdrop" onclick="closeSheet()">
+            <div class="booking-sheet-panel" id="sheet-panel" onclick="event.stopPropagation()">
+                <div class="sheet-handle-bar" onclick="closeSheet()"></div>
+
+                <div class="sheet-head-row">
+                    <h3 class="sheet-title-text" id="sheet-header-title">Reserve Seat</h3>
+                    <button class="sheet-close-btn" onclick="closeSheet()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round">
+                            <line x1="18" x2="6" y1="6" y2="18" />
+                            <line x1="6" x2="18" y1="6" y2="18" />
+                        </svg>
+                    </button>
+                </div>
+
+                <section class="space-detail-hero">
+                    <div class="space-detail-main-image">
+                        <img id="detail-main-image" src="cozy_study_space.png" alt="Reading room interior">
+                        <span class="space-detail-photo-badge" id="detail-photo-badge">4 photos</span>
+                    </div>
+                    <div class="space-detail-side-stack">
+                        <div class="space-detail-side-image">
+                            <img id="detail-side-image-one" src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=300&q=76" alt="Study desks">
+                        </div>
+                        <div class="space-detail-side-image">
+                            <img id="detail-side-image-two" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=300&q=76" alt="Reading area">
+                        </div>
+                    </div>
+                </section>
+
+                <section class="space-detail-summary">
+                    <div class="space-detail-meta-row" id="detail-meta-row"></div>
+                    <p class="space-detail-copy" id="detail-description"></p>
+                </section>
+
+                <section class="space-detail-grid">
+                    <div class="space-info-card">
+                        <span>Location</span>
+                        <strong id="detail-location">Kalyan West · 0.4 km</strong>
+                    </div>
+                    <div class="space-info-card">
+                        <span>Best for</span>
+                        <strong id="detail-best-for">Deep work & exam prep</strong>
+                    </div>
+                    <div class="space-info-card">
+                        <span>Hours</span>
+                        <strong id="detail-hours">7:00 AM – 11:00 PM</strong>
+                    </div>
+                    <div class="space-info-card">
+                        <span>Ambience</span>
+                        <strong id="detail-ambience">Quiet, bright, supervised</strong>
+                    </div>
+                </section>
+
+                <section class="space-layout-card">
+                    <div class="space-layout-head">
+                        <strong>Space layout</strong>
+                        <span id="detail-layout-caption">18 desks · 12 free</span>
+                    </div>
+                    <div class="mini-floor-layout">
+                        <div class="floor-zone focus">Focus desks</div>
+                        <div style="display:grid; gap:8px;">
+                            <div class="floor-zone quiet">Silent bay</div>
+                            <div class="floor-zone cafe">Pantry</div>
+                            <div class="floor-zone entry">Entry & reception</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seat Selector Layout Grid -->
+                <div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                        <span style="font-size:13px; font-weight:700; color:var(--zyvo-text-muted);">Select Focus
+                            Desk</span>
+                        <span id="selected-desk-prompt"
+                            style="font-size:12px; font-weight:700; color:var(--zyvo-orange)">Choose a seat</span>
+                    </div>
+
+                    <div class="seat-map-grid-box" id="sheet-seat-grid">
+                        <!-- Desks loaded in JS -->
+                    </div>
+                </div>
+
+                <!-- Grid Legends -->
+                <div class="legends-flex-row">
+                    <div class="legend-bullet-item">
+                        <span class="legend-bullet-color"
+                            style="background:#FFFFFF; border:1px solid var(--zyvo-border)"></span>
+                        Free
+                    </div>
+                    <div class="legend-bullet-item">
+                        <span class="legend-bullet-color" style="background:var(--zyvo-orange)"></span>
+                        Selected
+                    </div>
+                    <div class="legend-bullet-item">
+                        <span class="legend-bullet-color" style="background:rgba(0,0,0,0.08)"></span>
+                        Full
+                    </div>
+                </div>
+
+                <!-- Duration Picker and Pricing -->
+                <div class="sheet-bottom-action">
+                <div class="sheet-pricing-row">
+                    <div>
+                        <span style="font-size:13px; font-weight:700; color:var(--zyvo-text-muted);">Study
+                            Duration</span>
+                        <div class="hours-picker-flex" style="margin-top:6px;">
+                            <div class="hour-chip-btn active" onclick="updateDurationPrice(2, 80)">2h</div>
+                            <div class="hour-chip-btn" onclick="updateDurationPrice(4, 150)">4h</div>
+                            <div class="hour-chip-btn" onclick="updateDurationPrice(8, 280)">8h</div>
+                        </div>
+                    </div>
+
+                    <div class="pricing-box-col">
+                        <span class="pricing-text-val" id="price-amount-lbl">₹80</span>
+                        <span class="pricing-sub-val">Credits / Seat</span>
+                    </div>
+                </div>
+
+                <button class="btn-reserve-cta" onclick="confirmReservationSubmit()">
+                    Confirm Reservation →
+                </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inside-Phone Confetti Canvas -->
+        <canvas id="phone-confetti-canvas"></canvas>
+
+        <!-- iOS Native Status Bar -->
+        <div class="status-bar">
+            <div class="status-time">9:41</div>
+            <div class="status-icons">
+                <!-- Cellular Network -->
+                <svg viewBox="0 0 24 24" class="status-icon-svg">
+                    <rect x="2" y="16" width="3" height="5" rx="1" />
+                    <rect x="7" y="12" width="3" height="9" rx="1" />
+                    <rect x="12" y="8" width="3" height="13" rx="1" />
+                    <rect x="17" y="3" width="3" height="18" rx="1" />
+                </svg>
+                <!-- Wi-Fi -->
+                <svg viewBox="0 0 24 24" class="status-icon-svg">
+                    <path d="M12 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
+                    <path d="M5 12.85a10 10 0 0 1 14 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                        fill="none" />
+                    <path d="M8.5 16.35a5 5 0 0 1 7 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                        fill="none" />
+                </svg>
+                <!-- Battery -->
+                <svg viewBox="0 0 24 24" class="status-icon-svg" style="width:16px;">
+                    <rect x="2" y="6" width="16" height="12" rx="3" fill="none" stroke="currentColor"
+                        stroke-width="2" />
+                    <rect x="6" y="9" width="8" height="6" rx="1" />
+                    <path d="M20 10v4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- Immersive App Tab View Container -->
+        <div class="scroll-content">
+
+            <!-- VIEW 1: DISCOVER TAB FEED -->
+            <div class="app-main-content app-screen-view active-view" id="tab-panel-discover">
+
+                <!-- App Branding Header -->
+                <header class="branding-header">
+                    <div class="brand-logo-pack">
+                        <!-- Stylized Y branding with circular bottom dot -->
+                        <svg width="26" height="26" viewBox="0 0 100 100" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 20C28 35 40 45 48 52V72C48 74 52 74 52 72V52C60 45 72 35 80 20"
+                                stroke="#F97316" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+                            <circle cx="50" cy="85" r="8" fill="#F97316" />
+                        </svg>
+                        <span class="brand-logo-name">ZYV<span class="brand-logo-o">O</span></span>
+                    </div>
+
+                    <div class="home-header-actions">
+                        <button class="home-notification" type="button"
+                            onclick="showProfileToast('3 new student offers near you')" aria-label="Notifications">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                                <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" />
+                                <path d="M10 21h4" />
+                            </svg>
+                        </button>
+                        <div class="user-profile-trigger"
+                            onclick="navigationTabSwitch('profile', document.querySelector('[onclick*=\'profile\']'))">
+                            <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=120&q=80"
+                                alt="Manohar Student Profile">
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Greeting Section -->
+                <section class="greeting-area">
+                    <h2 class="greeting-headline">Good morning, Manohar 👋</h2>
+                    <p class="greeting-subheadline">Ready to make today count?</p>
+                </section>
+
+                <!-- Zomato / Swiggy inspired live location selector -->
+                <section class="location-picker-wrap">
+                    <button class="location-picker-button" type="button" onclick="toggleLocationMenu(event)"
+                        aria-label="Choose your location" aria-expanded="false" id="location-picker-button">
+                        <span class="location-pin-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                        </span>
+                        <span class="location-copy">
+                            <span class="location-label-row">
+                                <span id="location-title">Kalyan West</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <path d="m6 9 6 6 6-6" />
+                                </svg>
+                            </span>
+                            <span class="location-address" id="location-address">Kalyan, Maharashtra · Tap to change</span>
+                        </span>
+                    </button>
+
+                    <div class="location-menu" id="location-menu">
+                        <button class="location-option" type="button" onclick="detectCurrentLocation(event)">
+                            <span class="location-option-icon">⌖</span>
+                            <span>
+                                <strong>Use current location</strong>
+                                <small id="location-detect-status">Using GPS for nearby spaces</small>
+                            </span>
+                        </button>
+                        <button class="location-option" type="button"
+                            onclick="selectSavedLocation(event, 'Kalyan West', 'Kalyan, Maharashtra')">
+                            <span class="location-option-icon">⌂</span>
+                            <span><strong>Home · Kalyan West</strong><small>Kalyan, Maharashtra</small></span>
+                        </button>
+                        <button class="location-option" type="button"
+                            onclick="selectSavedLocation(event, 'Thane Station', 'Naupada, Thane West')">
+                            <span class="location-option-icon">♟</span>
+                            <span><strong>Thane Station</strong><small>Naupada, Thane West</small></span>
+                        </button>
+                        <button class="location-option" type="button"
+                            onclick="selectSavedLocation(event, 'Powai', 'Hiranandani Gardens, Mumbai')">
+                            <span class="location-option-icon">★</span>
+                            <span><strong>Powai</strong><small>Hiranandani Gardens, Mumbai</small></span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Search Spaces Section -->
+                <section class="search-input-wrap">
+                    <svg class="search-icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" x2="16.65" y1="21" y2="16.65" />
+                    </svg>
+                    <input type="text" class="search-input-field" id="discover-search-field"
+                        placeholder="Search library, study hub or café" oninput="executeSearchFilter(this.value)">
+                </section>
+
+                <!-- Filter Chips row -->
+                <div class="filter-scroll-row">
+                    <div class="filter-chips-flex">
+                        <div class="orange-outlined-chip active" onclick="applyFilterTag(this, 'all')">Near Me</div>
+                        <div class="orange-outlined-chip" onclick="applyFilterTag(this, 'Quiet')">Quiet</div>
+                        <div class="orange-outlined-chip" onclick="applyFilterTag(this, 'Wi-Fi')">Wi-Fi</div>
+                        <div class="orange-outlined-chip" onclick="applyFilterTag(this, 'Open Now')">Open Now</div>
+                        <div class="orange-outlined-chip" onclick="applyFilterTag(this, 'Cafés')">Cafés</div>
+                        <div class="orange-outlined-chip" onclick="applyFilterTag(this, 'Libraries')">Libraries</div>
+                    </div>
+                </div>
+
+                <div class="featured-section-heading">
+                    <h3>Recommended for you</h3>
+                    <span>Matches your study style</span>
+                </div>
+
+                <article class="premium-featured-card"
+                    onclick="openReserveModal('Kalyan Reading Room', 32, '0.4 km', 'Quiet Zone')"
+                    data-categories="Quiet Wi-Fi Open Now Libraries">
+                    <div class="featured-card-image-box">
+                        <div class="featured-image-topline">
+                            <span class="verified-space-badge">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7">
+                                    <path d="m5 12 4 4L19 6" />
+                                </svg>
+                                Student verified
+                            </span>
+                            <button class="space-save-button" type="button" aria-label="Save study hall"
+                                onclick="event.stopPropagation(); toggleSavedSpace(this)">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" />
+                                </svg>
+                            </button>
+                        </div>
+                        <img src="cozy_study_space.png"
+                            onerror="this.src='https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800&q=82'"
+                            alt="Kalyan Reading Room interior">
+                        <div class="featured-image-bottomline">
+                            <div class="image-space-copy">
+                                <strong>Kalyan Reading Room</strong>
+                                <span>0.4 km away · Quiet study floor</span>
+                            </div>
+                            <span class="image-rating-badge"><span>★</span> 4.8</span>
+                        </div>
+                    </div>
+                    <div class="featured-card-body">
+                        <div class="space-availability-row">
+                            <div class="availability-copy">
+                                <span class="availability-dot"></span>
+                                <span>
+                                    <strong>Available now · 12 seats left</strong>
+                                    <small>Usually fills after 6:30 PM</small>
+                                </span>
+                            </div>
+                            <div class="space-price"><strong>₹40</strong><small>per hour</small></div>
+                        </div>
+                        <div class="featured-details-grid">
+                            <div class="featured-detail-pill">⌁ 150 Mbps Wi-Fi</div>
+                            <div class="featured-detail-pill">⚡ Charging desks</div>
+                            <div class="featured-detail-pill">☕ Coffee & water</div>
+                            <div class="featured-detail-pill">◷ Open until 11 PM</div>
+                        </div>
+                        <div class="featured-booking-footer">
+                            <button class="btn-reserve-cta"
+                                onclick="event.stopPropagation(); openReserveModal('Kalyan Reading Room', 32, '0.4 km', 'Quiet Zone')">
+                                Reserve a seat →
+                            </button>
+                            <button class="space-detail-button" type="button"
+                                onclick="event.stopPropagation(); openReserveModal('Kalyan Reading Room', 32, '0.4 km', 'Quiet Zone')">
+                                Details
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Previous featured card retained as a data sample -->
+                <div class="premium-featured-card legacy-featured-card"
+                    onclick="openReserveModal('Kalyan Reading Room', 32, '0.4 km', 'Quiet Zone')"
+                    data-categories="Quiet Wi-Fi Open Now Libraries">
+                    <div class="featured-card-image-box">
+                        <!-- LIVE animated indicator badge -->
+                        <div class="live-status-badge">
+                            <span class="live-dot-pulse"></span>
+                            LIVE
+                        </div>
+                        <!-- Standard featured study space image (wooden interior, wooden tables, sunlit) -->
+                        <img src="cozy_study_space.png"
+                            onerror="this.src='https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800&q=80'"
+                            alt="Sunlit Kalyan Reading Room">
+                    </div>
+
+                    <div class="featured-card-body">
+                        <div class="featured-card-header">
+                            <div>
+                                <h4 class="featured-card-title">Kalyan Reading Room</h4>
+                                <div class="featured-card-meta-row">
+                                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor"
+                                        stroke-width="2.5">
+                                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                                        <circle cx="12" cy="10" r="3" />
+                                    </svg>
+                                    <span>0.4 km</span>
+                                    <span style="color:var(--zyvo-text-disclaimer);">•</span>
+                                    <span>Quiet Zone</span>
+                                </div>
+                            </div>
+
+                            <div class="occupancy-badge-orange">
+                                32% Seats Free
+                            </div>
+                        </div>
+
+                        <!-- Amenities indicators -->
+                        <div class="featured-details-grid">
+                            <div class="featured-detail-pill">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                </svg>
+                                ⭐ 4.8
+                            </div>
+                            <div class="featured-detail-pill">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <path d="M12 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
+                                    <path d="M5 12.85a10 10 0 0 1 14 0" stroke-linecap="round" />
+                                    <path d="M8.5 16.35a5 5 0 0 1 7 0" stroke-linecap="round" />
+                                </svg>
+                                Fast Wi-Fi
+                            </div>
+                            <div class="featured-detail-pill">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <path d="M17 8h1a4 4 0 1 1 0 8h-1" />
+                                    <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" />
+                                    <line x1="6" x2="6" y1="2" y2="4" />
+                                    <line x1="10" x2="10" y1="2" y2="4" />
+                                    <line x1="14" x2="14" y1="2" y2="4" />
+                                </svg>
+                                Café Nearby
+                            </div>
+                            <div class="featured-detail-pill">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <polyline points="12 6 12 12 16 14" />
+                                </svg>
+                                Open Until 11 PM
+                            </div>
+                        </div>
+
+                        <button class="btn-reserve-cta"
+                            onclick="event.stopPropagation(); openReserveModal('Kalyan Reading Room', 32, '0.4 km', 'Quiet Zone')">
+                            Reserve Seat →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Section: Nearby Focus Hubs -->
+                <div class="row-title-container">
+                    <h3 class="row-title">Nearby Focus Hubs</h3>
+                    <span class="row-link-btn"
+                        onclick="navigationTabSwitch('map', document.querySelector('[onclick*=\'map\']'))">See
+                        All</span>
+                </div>
+
+                <!-- Listing Cards list -->
+                <div class="compact-listings-box">
+                    <!-- Card 1 -->
+                    <div class="compact-space-card"
+                        onclick="openReserveModal('CoWork Hive', 58, '1.2 km', 'Wi-Fi Zone')"
+                        data-categories="Wi-Fi Open Now Cafés">
+                        <div class="compact-thumbnail-box">
+                            <img src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?auto=format&fit=crop&w=150&q=80"
+                                alt="CoWork Hive Study Space">
+                        </div>
+                        <div class="compact-details">
+                            <h4 class="compact-title">CoWork Hive</h4>
+                            <div class="compact-meta-row">
+                                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
+                                <span>1.2 km</span>
+                            </div>
+                            <div class="compact-amenity-tag">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                                    <line x1="8" x2="16" y1="21" y2="21" />
+                                    <line x1="12" x2="12" y1="17" y2="21" />
+                                </svg>
+                                High-Speed Wi-Fi
+                            </div>
+                            <div class="occupancy-badge-green">
+                                58% Seats Free
+                            </div>
+                        </div>
+                        <div>
+                            <button class="btn-compact-reserve"
+                                onclick="event.stopPropagation(); openReserveModal('CoWork Hive', 58, '1.2 km', 'Wi-Fi Zone')">
+                                Reserve
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="compact-space-card"
+                        onclick="openReserveModal('City Public Library', 41, '2.0 km', 'Silent Zone')"
+                        data-categories="Quiet Open Now Libraries">
+                        <div class="compact-thumbnail-box">
+                            <img src="https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&w=150&q=80"
+                                alt="City Public Library">
+                        </div>
+                        <div class="compact-details">
+                            <h4 class="compact-title">City Public Library</h4>
+                            <div class="compact-meta-row">
+                                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
+                                <span>2.0 km</span>
+                            </div>
+                            <div class="compact-amenity-tag">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <line x1="23" x2="1" y1="1" y2="23" />
+                                    <path
+                                        d="M9 9v6a3 3 0 0 0 3 3h1.586l4.707 4.707A1 1 0 0 0 20 22V4a1 1 0 0 0-1.707-.707L13.586 8H12a3 3 0 0 0-3 3Z" />
+                                </svg>
+                                Silent Study Zone
+                            </div>
+                            <div class="occupancy-badge-green">
+                                41% Seats Free
+                            </div>
+                        </div>
+                        <div>
+                            <button class="btn-compact-reserve"
+                                onclick="event.stopPropagation(); openReserveModal('City Public Library', 41, '2.0 km', 'Silent Zone')">
+                                Reserve
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="compact-space-card"
+                        onclick="openReserveModal('The Study Yard', 72, '2.4 km', 'Focus Zone')"
+                        data-categories="Quiet Wi-Fi Open Now">
+                        <div class="compact-thumbnail-box">
+                            <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=180&q=80"
+                                alt="The Study Yard workspace">
+                        </div>
+                        <div class="compact-details">
+                            <h4 class="compact-title">The Study Yard</h4>
+                            <div class="compact-meta-row"><span>2.4 km · Open 24 hours</span></div>
+                            <div class="compact-amenity-tag">⚡ Power desks & Wi-Fi</div>
+                            <div class="occupancy-badge-green">72% Seats Free</div>
+                        </div>
+                        <div>
+                            <button class="btn-compact-reserve"
+                                onclick="event.stopPropagation(); openReserveModal('The Study Yard', 72, '2.4 km', 'Focus Zone')">Reserve</button>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="compact-space-card"
+                        onclick="openReserveModal('Bean & Books', 36, '2.8 km', 'Café Zone')"
+                        data-categories="Wi-Fi Open Now Cafés">
+                        <div class="compact-thumbnail-box">
+                            <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=180&q=80"
+                                alt="Bean and Books cafe">
+                        </div>
+                        <div class="compact-details">
+                            <h4 class="compact-title">Bean &amp; Books</h4>
+                            <div class="compact-meta-row"><span>2.8 km · ₹60/hour</span></div>
+                            <div class="compact-amenity-tag">☕ Coffee included</div>
+                            <div class="occupancy-badge-green">36% Seats Free</div>
+                        </div>
+                        <div>
+                            <button class="btn-compact-reserve"
+                                onclick="event.stopPropagation(); openReserveModal('Bean & Books', 36, '2.8 km', 'Café Zone')">Reserve</button>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="compact-space-card"
+                        onclick="openReserveModal('Scholars Den', 49, '3.1 km', 'Library Zone')"
+                        data-categories="Quiet Wi-Fi Libraries">
+                        <div class="compact-thumbnail-box">
+                            <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=180&q=80"
+                                alt="Scholars Den library">
+                        </div>
+                        <div class="compact-details">
+                            <h4 class="compact-title">Scholars Den</h4>
+                            <div class="compact-meta-row"><span>3.1 km · Closes 10 PM</span></div>
+                            <div class="compact-amenity-tag">📚 Reference library</div>
+                            <div class="occupancy-badge-green">49% Seats Free</div>
+                        </div>
+                        <div>
+                            <button class="btn-compact-reserve"
+                                onclick="event.stopPropagation(); openReserveModal('Scholars Den', 49, '3.1 km', 'Library Zone')">Reserve</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section: Trending Near You -->
+                <div class="row-title-container">
+                    <h3 class="row-title">Trending Near You</h3>
+                </div>
+
+                <!-- Trending scroll list -->
+                <div class="trending-row-outer">
+                    <div class="trending-flex-row">
+                        <!-- Study Cafe Card -->
+                        <div class="trending-space-card"
+                            onclick="openReserveModal('Central Grind Café', 24, '0.8 km', 'Café Zone')">
+                            <div class="trending-thumbnail-box">
+                                <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=120&q=80"
+                                    alt="Study Café">
+                            </div>
+                            <div class="trending-detail-block">
+                                <span class="trending-category-tag">Study Café</span>
+                                <h4 class="trending-title-text">Central Grind Café</h4>
+                                <div class="trending-stats-row">
+                                    <span>24% Free</span>
+                                    <span class="trending-rating-block">
+                                        <svg viewBox="0 0 24 24">
+                                            <polygon
+                                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                        </svg>
+                                        4.7
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Reading Room Card -->
+                        <div class="trending-space-card"
+                            onclick="openReserveModal('South Campus Reading Room', 12, '0.6 km', 'Quiet Zone')">
+                            <div class="trending-thumbnail-box">
+                                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=120&q=80"
+                                    alt="Reading Room">
+                            </div>
+                            <div class="trending-detail-block">
+                                <span class="trending-category-tag">Reading Room</span>
+                                <h4 class="trending-title-text">South Campus</h4>
+                                <div class="trending-stats-row">
+                                    <span style="color:var(--zyvo-orange); font-weight:700;">12% Free</span>
+                                    <span class="trending-rating-block">
+                                        <svg viewBox="0 0 24 24">
+                                            <polygon
+                                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                        </svg>
+                                        4.9
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Library Card -->
+                        <div class="trending-space-card"
+                            onclick="openReserveModal('Science Library Center', 65, '1.8 km', 'Library Zone')">
+                            <div class="trending-thumbnail-box">
+                                <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=120&q=80"
+                                    alt="Library Room">
+                            </div>
+                            <div class="trending-detail-block">
+                                <span class="trending-category-tag">Library</span>
+                                <h4 class="trending-title-text">Science Library</h4>
+                                <div class="trending-stats-row">
+                                    <span>65% Free</span>
+                                    <span class="trending-rating-block">
+                                        <svg viewBox="0 0 24 24">
+                                            <polygon
+                                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                        </svg>
+                                        4.5
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="trending-space-card"
+                            onclick="openReserveModal('Night Owl Study Hub', 54, '2.2 km', '24/7 Zone')"
+                            data-categories="Quiet Wi-Fi Open Now">
+                            <div class="trending-thumbnail-box">
+                                <img src="https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=180&q=80"
+                                    alt="Night Owl Study Hub">
+                            </div>
+                            <div class="trending-detail-block">
+                                <span class="trending-category-tag">Open 24/7</span>
+                                <h4 class="trending-title-text">Night Owl Hub</h4>
+                                <div class="trending-stats-row">
+                                    <span>54% Free</span>
+                                    <span class="trending-rating-block">★ 4.8</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="trending-space-card"
+                            onclick="openReserveModal('Focus Factory', 67, '3.5 km', 'Co-working Zone')"
+                            data-categories="Wi-Fi Open Now">
+                            <div class="trending-thumbnail-box">
+                                <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=180&q=80"
+                                    alt="Focus Factory co-working space">
+                            </div>
+                            <div class="trending-detail-block">
+                                <span class="trending-category-tag">Co-working</span>
+                                <h4 class="trending-title-text">Focus Factory</h4>
+                                <div class="trending-stats-row">
+                                    <span>67% Free</span>
+                                    <span class="trending-rating-block">★ 4.6</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- VIEW 2: RESERVE TAB VIEW -->
+            <div class="app-main-content app-screen-view" id="tab-panel-reserve">
+                <header class="branding-header">
+                    <div class="brand-logo-pack">
+                        <span class="brand-logo-name" style="font-size:22px; font-weight:800;">My Reserves</span>
+                    </div>
+                </header>
+
+                <div class="bookings-empty-state" id="list-empty-bookings-box">
+                    <div class="bookings-empty-icon-circle">
+                        <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                            <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+                            <line x1="16" x2="16" y1="2" y2="6" />
+                            <line x1="8" x2="8" y1="2" y2="6" />
+                            <line x1="3" x2="21" y1="10" y2="10" />
+                        </svg>
+                    </div>
+                    <h4
+                        style="font-family:'Outfit', sans-serif; font-size:16px; font-weight:700; color:var(--zyvo-text-main);">
+                        No Active Bookings</h4>
+                    <p style="font-size:12px; color:var(--zyvo-text-muted);">Reserve a seat from the Discover feed and
+                        your digital ticket will appear here.</p>
+                </div>
+
+                <!-- Bookings listing container -->
+                <div id="list-populated-bookings" style="display:none; flex-direction:column; gap:14px;">
+                    <!-- Bookings injected here dynamically -->
+                </div>
+            </div>
+
+            <!-- VIEW 3: MAP VIEW -->
+            <div class="app-main-content app-screen-view" id="tab-panel-map"
+                style="padding-left:0; padding-right:0; padding-top:0;">
+                <div class="phone-map-canvas">
+
+                    <div class="map-glowing-pin" style="top: 130px; left: 80px;"
+                        onclick="openReserveModal('Kalyan Reading Room', 32, '0.4 km', 'Quiet Zone')">
+                        <div class="map-pin-circle"></div>
+                        <div class="map-pin-lbl">Kalyan (32%)</div>
+                    </div>
+
+                    <div class="map-glowing-pin" style="top: 280px; left: 240px;"
+                        onclick="openReserveModal('CoWork Hive', 58, '1.2 km', 'Wi-Fi Zone')">
+                        <div class="map-pin-circle"></div>
+                        <div class="map-pin-lbl">CoWork Hive (58%)</div>
+                    </div>
+
+                    <div class="map-glowing-pin" style="top: 400px; left: 110px;"
+                        onclick="openReserveModal('City Public Library', 41, '2.0 km', 'Silent Zone')">
+                        <div class="map-pin-circle"></div>
+                        <div class="map-pin-lbl">Public Library (41%)</div>
+                    </div>
+
+                    <!-- Controls Overlay -->
+                    <div class="map-pill-overlay">
+                        <div class="map-capsule-btn">
+                            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"
+                                viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="m16.24 7.76-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z" />
+                            </svg>
+                            Map View
+                        </div>
+                        <div class="map-capsule-btn" style="background:#F97316;">
+                            Manohar (0.4 km)
+                        </div>
+                    </div>
+
+                    <!-- SVG simulated streets background -->
+                    <svg width="100%" height="100%" style="opacity: 0.15; pointer-events: none;"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 0,100 L 400,250 M 0,350 L 400,300 M 150,0 L 220,600 M 300,0 L 50,600"
+                            stroke="currentColor" stroke-width="4" fill="none" />
+                        <path d="M 0,200 C 150,220 200,400 400,420" stroke="currentColor" stroke-width="8"
+                            fill="none" />
+                        <circle cx="180" cy="210" r="120" stroke="currentColor" stroke-width="1" fill="none"
+                            stroke-dasharray="4" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- VIEW 4: PROFILE VIEW -->
+            <div class="app-main-content app-screen-view" id="tab-panel-profile-legacy" style="display:none;">
+                <header class="branding-header">
+                    <div class="brand-logo-pack">
+                        <span class="brand-logo-name" style="font-size:22px; font-weight:800;">My Campus ID</span>
+                    </div>
+                </header>
+
+                <div class="student-profile-card">
+                    <div class="student-profile-avatar">
+                        <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=240&q=80"
+                            alt="Manohar Student profile">
+                    </div>
+                    <div style="text-align:center;">
+                        <h4
+                            style="font-family:'Outfit', sans-serif; font-size:20px; font-weight:800; color:var(--zyvo-text-main);">
+                            Manohar L.</h4>
+                        <p style="font-size:13px; color:var(--zyvo-text-muted); font-weight:500;">CSE Undergraduate
+                            Student</p>
+                    </div>
+
+                    <div class="student-profile-pills">
+                        <div class="student-profile-pill-item">
+                            <span class="student-profile-pill-val">24.5 hrs</span>
+                            <p class="student-profile-pill-lbl">Focus Time</p>
+                        </div>
+                        <div class="student-profile-pill-item">
+                            <span class="student-profile-pill-val">#12</span>
+                            <p class="student-profile-pill-lbl">Campus Rank</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="student-menu-list">
+                    <div class="student-menu-item">
+                        <div class="student-menu-left">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <rect width="20" height="14" x="2" y="5" rx="2" />
+                                <line x1="2" x2="22" y1="10" y2="10" />
+                            </svg>
+                            <span>Zyvo Wallet Balance</span>
+                        </div>
+                        <span style="color:var(--zyvo-orange); font-size:12px;">₹420 Credits</span>
+                    </div>
+
+                    <div class="student-menu-item">
+                        <div class="student-menu-left">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <span>Premium Member Plan</span>
+                        </div>
+                        <span style="color:#16A34A; font-size:11px; font-weight:700;">ACTIVE</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Redesigned premium campus profile -->
+            <div class="app-main-content app-screen-view" id="tab-panel-profile">
+                <header class="profile-topbar">
+                    <h2 class="profile-page-title">My Campus ID</h2>
+                    <div class="profile-top-actions">
+                        <button class="profile-icon-button profile-notification-button" type="button"
+                            onclick="showProfileToast('You have 3 new campus updates')" aria-label="Notifications">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" /><path d="M10 21h4" /></svg>
+                        </button>
+                        <button class="profile-icon-button" type="button" onclick="showProfileToast('Profile settings opened')" aria-label="Settings">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3" /><path d="M19 12a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" /><path d="M12 2v3M12 19v3M2 12h3M19 12h3" /></svg>
+                        </button>
+                    </div>
+                </header>
+
+                <section class="campus-id-card">
+                    <div class="campus-id-brand"><span>ZYVO · Student Passport</span><span class="campus-id-chip"></span></div>
+                    <div class="campus-id-main">
+                        <div class="verified-avatar-ring">
+                            <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=240&q=85" alt="Manohar L.">
+                            <span class="avatar-verified-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 4 4L19 6" /></svg></span>
+                        </div>
+                        <div class="campus-profile-copy">
+                            <div class="campus-name-row"><h3 class="campus-student-name">Manohar L.</h3><span class="verified-text-badge">VERIFIED</span></div>
+                            <p class="campus-student-role">CSE Undergraduate Student</p>
+                            <div class="campus-meta"><span>IIIT Sonepat</span><span>•</span><span>Semester 3</span></div>
+                        </div>
+                    </div>
+                    <div class="achievement-strip">
+                        <div class="achievement-mini"><span class="achievement-mini-icon">🔥</span><strong>42 Days</strong><small>STREAK</small></div>
+                        <div class="achievement-mini"><span class="achievement-mini-icon">⏱️</span><strong>24.5 hrs</strong><small>FOCUS</small></div>
+                        <div class="achievement-mini"><span class="achievement-mini-icon">🏆</span><strong>#12</strong><small>RANK</small></div>
+                        <div class="achievement-mini"><span class="achievement-mini-icon">🥇</span><strong>Top 5%</strong><small>PERFORMER</small></div>
+                    </div>
+                </section>
+
+                <div class="profile-section-heading"><h3>Your momentum</h3><span>This semester</span></div>
+                <section class="profile-stats-grid">
+                    <article class="profile-stat-card"><div class="stat-card-top"><span class="stat-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg></span><span class="stat-change">+12%</span></div><strong class="stat-value">24.5 hrs</strong><span class="stat-label">Focus time</span></article>
+                    <article class="profile-stat-card"><div class="stat-card-top"><span class="stat-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z" /><path d="M7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3" /></svg></span><span class="stat-change">↑ 3</span></div><strong class="stat-value">#12</strong><span class="stat-label">Campus rank</span></article>
+                    <article class="profile-stat-card"><div class="stat-card-top"><span class="stat-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><rect x="3" y="4" width="18" height="17" rx="3" /><path d="M8 2v4M16 2v4M3 10h18" /></svg></span><span class="stat-change">+8</span></div><strong class="stat-value">68</strong><span class="stat-label">Study sessions</span></article>
+                    <article class="profile-stat-card"><div class="stat-card-top"><span class="stat-icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><circle cx="12" cy="12" r="9" /><path d="M8 12h8M12 8v8" /></svg></span><span class="stat-change">+120</span></div><strong class="stat-value">1,280</strong><span class="stat-label">Credits earned</span></article>
+                </section>
+
+                <section class="profile-wallet-card">
+                    <div class="wallet-top"><div><span class="wallet-eyebrow">Zyvo Wallet</span><div class="wallet-balance">₹420 <span style="font-size:13px;">Credits</span></div></div><span class="wallet-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M20 7V6a2 2 0 0 0-2-2H5a3 3 0 0 0 0 6h15v8a2 2 0 0 1-2 2H5a3 3 0 0 1-3-3V7" /><path d="M16 14h.01" /></svg></span></div>
+                    <div class="wallet-bottom"><span class="wallet-caption">Unlock premium spaces with credits.</span><button class="wallet-earn-button" type="button" onclick="showProfileToast('Complete challenges to earn more credits')">Earn More Credits</button></div>
+                </section>
+
+                <section class="profile-premium-card">
+                    <div class="premium-card-top">
+                        <span class="premium-badge-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="m3 7 4 4 5-7 5 7 4-4-2 11H5L3 7Z" /><path d="M5 18h14" /></svg></span>
+                        <div class="premium-copy"><div class="premium-title-row"><strong>ZYVO Premium</strong><span class="active-status-pill">ACTIVE</span></div><p>Your all-access pass to focused campus life.</p></div>
+                        <button class="premium-upgrade-button" type="button" onclick="showProfileToast('Your Premium plan is active')">Manage</button>
+                    </div>
+                    <div class="premium-benefits"><span class="premium-benefit">Priority booking</span><span class="premium-benefit">2× credits</span><span class="premium-benefit">Free cancellations</span></div>
+                </section>
+
+                <section class="profile-progress-card">
+                    <div class="progress-card-head"><strong>Weekly Study Goal</strong><span>80% Completed</span></div>
+                    <p class="progress-card-caption">12 of 15 focused hours completed · 3 hrs to go</p>
+                    <div class="weekly-progress-track"><div class="weekly-progress-fill"></div></div>
+                    <div class="progress-days"><span class="done">M</span><span class="done">T</span><span class="done">W</span><span class="done">T</span><span class="done">F</span><span>S</span><span>S</span></div>
+                </section>
+
+                <div class="profile-section-heading"><h3>Recent activity</h3><span>View all</span></div>
+                <section class="profile-activity-card">
+                    <div class="activity-row"><span class="activity-icon">⌖</span><span class="activity-copy"><strong>Checked into Study Hub</strong><small>Kalyan Reading Room</small></span><span class="activity-time">10m</span></div>
+                    <div class="activity-row"><span class="activity-icon">＋</span><span class="activity-copy"><strong>Earned 20 Credits</strong><small>Daily focus challenge</small></span><span class="activity-time">2h</span></div>
+                    <div class="activity-row"><span class="activity-icon">↗</span><span class="activity-copy"><strong>Campus Rank Increased</strong><small>You moved from #15 to #12</small></span><span class="activity-time">1d</span></div>
+                    <div class="activity-row"><span class="activity-icon">◷</span><span class="activity-copy"><strong>Completed Focus Session</strong><small>90 minutes · Deep work</small></span><span class="activity-time">2d</span></div>
+                </section>
+
+                <div class="profile-section-heading"><h3>Quick actions</h3><span>Campus essentials</span></div>
+                <section class="profile-quick-grid">
+                    <button class="quick-action-button" type="button" onclick="navigationTabSwitch('discover', document.querySelector('.app-nav-tab[onclick*=discover]'))"><span class="quick-action-icon">▣</span><span>Book Study Hall</span></button>
+                    <button class="quick-action-button" type="button" onclick="navigationTabSwitch('map', document.querySelector('.app-nav-tab[onclick*=map]'))"><span class="quick-action-icon">⌖</span><span>Find Library</span></button>
+                    <button class="quick-action-button" type="button" onclick="showProfileToast('Study groups near you are loading')"><span class="quick-action-icon">♙</span><span>Join Study Group</span></button>
+                    <button class="quick-action-button" type="button" onclick="showProfileToast('Credit rewards catalogue opened')"><span class="quick-action-icon">◇</span><span>Redeem Credits</span></button>
+                </section>
+                <div style="height:8px;"></div>
+            </div>
+
+            <div class="profile-toast" id="profile-toast" role="status"></div>
+
+        </div>
+
+        <!-- iOS Glassmorphic Bottom Navigation Bar -->
+        <nav class="app-ios-bottom-bar">
+            <div class="app-nav-tab active" onclick="navigationTabSwitch('discover', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                    <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span class="app-nav-tab-label">Discover</span>
+            </div>
+
+            <div class="app-nav-tab" onclick="navigationTabSwitch('reserve', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+                    <line x1="16" x2="16" y1="2" y2="6" />
+                    <line x1="8" x2="8" y1="2" y2="6" />
+                    <line x1="3" x2="21" y1="10" y2="10" />
+                </svg>
+                <span class="app-nav-tab-label">Reserve</span>
+            </div>
+
+            <div class="app-nav-tab" onclick="navigationTabSwitch('map', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+                </svg>
+                <span class="app-nav-tab-label">Map</span>
+            </div>
+
+            <div class="app-nav-tab" onclick="navigationTabSwitch('profile', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+                <span class="app-nav-tab-label">Profile</span>
+            </div>
+        </nav>
+
+    </div>
+
+    <!-- JAVASCRIPT APP STATE ENGINE & MICRO-ANIMATIONS -->
+    <script>
+        // System variables
+        let currentSelectedSpace = 'Kalyan Reading Room';
+        let currentOccupancyRate = 32;
+        let selectedDeskId = '';
+        let selectedHourDuration = '2 Hours';
+        let selectedPrice = 80;
+        let localReservationsArray = [];
+        let profileToastTimer = null;
+
+        function showProfileToast(message) {
+            const toast = document.getElementById('profile-toast');
+            if (!toast) return;
+
+            toast.innerText = message;
+            toast.classList.add('show');
+            clearTimeout(profileToastTimer);
+            profileToastTimer = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2200);
+        }
+
+        function toggleSavedSpace(button) {
+            const isSaved = button.classList.toggle('saved');
+            button.setAttribute('aria-label', isSaved ? 'Remove saved study hall' : 'Save study hall');
+            showProfileToast(isSaved ? 'Study hall saved to favourites' : 'Removed from favourites');
+        }
+
+        function toggleLocationMenu(event) {
+            event.stopPropagation();
+            const menu = document.getElementById('location-menu');
+            const button = document.getElementById('location-picker-button');
+            const isOpen = menu.classList.toggle('open');
+            button.setAttribute('aria-expanded', String(isOpen));
+        }
+
+        function closeLocationMenu() {
+            const menu = document.getElementById('location-menu');
+            const button = document.getElementById('location-picker-button');
+            if (menu) menu.classList.remove('open');
+            if (button) button.setAttribute('aria-expanded', 'false');
+        }
+
+        function setLocationDisplay(title, address) {
+            document.getElementById('location-title').innerText = title;
+            document.getElementById('location-address').innerText = address;
+            closeLocationMenu();
+        }
+
+        function selectSavedLocation(event, title, address) {
+            event.stopPropagation();
+            setLocationDisplay(title, address);
+        }
+
+        async function detectCurrentLocation(event) {
+            event.stopPropagation();
+            const status = document.getElementById('location-detect-status');
+
+            if (!navigator.geolocation) {
+                status.innerText = 'Location is not supported in this browser';
+                return;
+            }
+
+            status.innerText = 'Detecting your location…';
+            navigator.geolocation.getCurrentPosition(async position => {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+                let title = 'Current location';
+                let address = `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
+
+                try {
+                    const response = await fetch(
+                        `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`,
+                        { headers: { 'Accept': 'application/json' } }
+                    );
+                    if (response.ok) {
+                        const result = await response.json();
+                        const area = result.address.suburb || result.address.neighbourhood ||
+                            result.address.city_district || result.address.city || result.address.town;
+                        const city = result.address.city || result.address.town ||
+                            result.address.village || result.address.state;
+                        title = area || city || 'Current location';
+                        address = result.display_name || address;
+                    }
+                } catch (error) {
+                    console.info('Reverse geocoding unavailable; showing coordinates.', error);
+                }
+
+                status.innerText = 'Location detected';
+                setLocationDisplay(title, address);
+            }, error => {
+                const messages = {
+                    1: 'Permission denied · choose a saved area',
+                    2: 'Location unavailable · try again',
+                    3: 'Location request timed out'
+                };
+                status.innerText = messages[error.code] || 'Could not detect location';
+            }, {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 300000
+            });
+        }
+
+        document.addEventListener('click', closeLocationMenu);
+
+        // Switch active view panel tabs
+        function navigationTabSwitch(tabName, clickedElement) {
+            // Set active nav styling
+            document.querySelectorAll('.app-nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            clickedElement.classList.add('active');
+
+            // Swap view panels
+            document.querySelectorAll('.app-screen-view').forEach(panel => {
+                panel.classList.remove('active-view');
+            });
+            document.getElementById('tab-panel-' + tabName).classList.add('active-view');
+
+            // Close bottom sheet if open
+            closeSheet();
+        }
+
+        // Toggle filter chips row to slice/filter cards dynamically
+        function applyFilterTag(chipElement, filterCategory) {
+            if (filterCategory === 'all') {
+                document.querySelectorAll('.orange-outlined-chip').forEach(c => c.classList.remove('active'));
+                chipElement.classList.add('active');
+            } else {
+                document.querySelector('.orange-outlined-chip[onclick*="all"]').classList.remove('active');
+                chipElement.classList.toggle('active');
+            }
+
+            // Collect all active filters
+            const activeChips = Array.from(document.querySelectorAll('.orange-outlined-chip.active'))
+                .map(c => c.innerText);
+
+            const hasFilters = activeChips.length > 0 && !activeChips.includes('Near Me');
+
+            // Filter list cards
+            document.querySelectorAll('[data-categories]').forEach(card => {
+                if (!hasFilters) {
+                    card.style.display = '';
+                    return;
+                }
+
+                const cardCats = card.getAttribute('data-categories').split(' ');
+                const matchesFilters = activeChips.some(tag => {
+                    if (tag === 'Quiet') return cardCats.includes('Quiet');
+                    if (tag === 'Wi-Fi') return cardCats.includes('Wi-Fi');
+                    if (tag === 'Open Now') return cardCats.includes('Open Now');
+                    if (tag === 'Cafés') return cardCats.includes('Cafés');
+                    if (tag === 'Libraries') return cardCats.includes('Libraries');
+                    return false;
+                });
+
+                card.style.display = matchesFilters ? '' : 'none';
+            });
+        }
+
+        // Search bar functionality
+        function executeSearchFilter(searchText) {
+            const query = searchText.toLowerCase().trim();
+            document.querySelectorAll('[data-categories]').forEach(card => {
+                const nameText = card.querySelector('h4').innerText.toLowerCase();
+                const categories = card.getAttribute('data-categories').toLowerCase();
+                if (nameText.includes(query) || categories.includes(query)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        const spaceDetailData = {
+            'Kalyan Reading Room': {
+                images: [
+                    'cozy_study_space.png',
+                    'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=420&q=78',
+                    'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=420&q=78'
+                ],
+                description: 'A verified quiet reading room with bright desks, charging access, stable Wi-Fi, and a supervised study floor for long focus sessions.',
+                location: 'Kalyan West · 0.4 km away',
+                bestFor: 'Deep work & exam prep',
+                hours: '7:00 AM – 11:00 PM',
+                ambience: 'Quiet, bright, supervised',
+                amenities: ['★ 4.8 rating', '⌁ 150 Mbps Wi-Fi', '⚡ Charging desks', '12 seats free'],
+                layout: '18 desks · 12 free'
+            },
+            'CoWork Hive': {
+                images: [
+                    'https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?auto=format&fit=crop&w=520&q=80',
+                    'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=420&q=78',
+                    'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=420&q=78'
+                ],
+                description: 'A modern co-working style study hub with fast internet, shared desks, meeting corners, and a slightly social but productive energy.',
+                location: 'Near campus road · 1.2 km away',
+                bestFor: 'Laptop work & group study',
+                hours: '8:00 AM – 10:30 PM',
+                ambience: 'Modern, active, collaborative',
+                amenities: ['★ 4.6 rating', '⌁ High-speed Wi-Fi', '▣ Group tables', '58% seats free'],
+                layout: '18 desks · 10 free'
+            },
+            'City Public Library': {
+                images: [
+                    'https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&w=520&q=80',
+                    'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=420&q=78',
+                    'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=420&q=78'
+                ],
+                description: 'A calm public-library setting with silent reading areas, spacious tables, book access, and a reliable environment for distraction-free study.',
+                location: 'City Library Road · 2.0 km away',
+                bestFor: 'Silent reading & research',
+                hours: '9:00 AM – 8:00 PM',
+                ambience: 'Silent, spacious, classic',
+                amenities: ['★ 4.7 rating', '◐ Silent zone', '▤ Library access', '41% seats free'],
+                layout: '18 desks · 7 free'
+            },
+            'The Study Yard': {
+                images: [
+                    'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=520&q=80',
+                    'https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&w=420&q=78',
+                    'https://images.unsplash.com/photo-1497366412874-3415097a27e7?auto=format&fit=crop&w=420&q=78'
+                ],
+                description: 'A flexible focus space with power desks, open seating, and extended hours for students who prefer late-night or long-session study.',
+                location: 'Study Yard Lane · 2.4 km away',
+                bestFor: 'Long sessions & night study',
+                hours: 'Open 24 hours',
+                ambience: 'Flexible, focused, energetic',
+                amenities: ['★ 4.5 rating', '⚡ Power desks', '◷ 24 hours', '72% seats free'],
+                layout: '18 desks · 13 free'
+            },
+            'Bean & Books': {
+                images: [
+                    'https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=520&q=80',
+                    'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=420&q=78',
+                    'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=420&q=78'
+                ],
+                description: 'A café-style study spot with warm lighting, coffee nearby, comfortable tables, and a casual atmosphere for lighter study sessions.',
+                location: 'Market Street · 2.8 km away',
+                bestFor: 'Casual study & reading',
+                hours: '8:30 AM – 11:00 PM',
+                ambience: 'Warm, café-like, relaxed',
+                amenities: ['★ 4.4 rating', '☕ Coffee included', '⌁ Wi-Fi', '36% seats free'],
+                layout: '18 desks · 6 free'
+            },
+            'Scholars Den': {
+                images: [
+                    'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=520&q=80',
+                    'https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=420&q=78',
+                    'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=420&q=78'
+                ],
+                description: 'A library-zone study room designed for concentrated reading, revision, and calm individual study with minimal noise.',
+                location: 'Scholars Avenue · 3.1 km away',
+                bestFor: 'Revision & quiet study',
+                hours: '7:30 AM – 9:30 PM',
+                ambience: 'Quiet, neat, academic',
+                amenities: ['★ 4.6 rating', '▤ Library zone', '◐ Quiet desks', '49% seats free'],
+                layout: '18 desks · 9 free'
+            }
+        };
+
+        function getSpaceDetails(spaceName, occupancyPercent, distance, zone) {
+            return spaceDetailData[spaceName] || {
+                images: [
+                    'cozy_study_space.png',
+                    'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=420&q=78',
+                    'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=420&q=78'
+                ],
+                description: `${spaceName} is a verified student space with comfortable seating, useful amenities, and a focus-friendly environment.`,
+                location: `${distance} away · ${zone}`,
+                bestFor: 'Focused study sessions',
+                hours: 'Open today',
+                ambience: zone,
+                amenities: ['★ Verified', `${occupancyPercent}% seats free`, zone, distance],
+                layout: '18 desks · live availability'
+            };
+        }
+
+        function renderSpaceDetails(spaceName, occupancyPercent, distance, zone) {
+            const details = getSpaceDetails(spaceName, occupancyPercent, distance, zone);
+            document.getElementById('detail-main-image').src = details.images[0];
+            document.getElementById('detail-side-image-one').src = details.images[1];
+            document.getElementById('detail-side-image-two').src = details.images[2];
+            document.getElementById('detail-photo-badge').innerText = details.images.length + ' photos';
+            document.getElementById('detail-description').innerText = details.description;
+            document.getElementById('detail-location').innerText = details.location;
+            document.getElementById('detail-best-for').innerText = details.bestFor;
+            document.getElementById('detail-hours').innerText = details.hours;
+            document.getElementById('detail-ambience').innerText = details.ambience;
+            document.getElementById('detail-layout-caption').innerText = details.layout;
+
+            const metaRow = document.getElementById('detail-meta-row');
+            metaRow.innerHTML = '';
+            details.amenities.forEach(item => {
+                const chip = document.createElement('span');
+                chip.className = 'space-detail-chip';
+                chip.innerText = item;
+                metaRow.appendChild(chip);
+            });
+        }
+
+        // Bottom sheet controls
+        function openReserveModal(spaceName, occupancyPercent, distance, zone) {
+            currentSelectedSpace = spaceName;
+            currentOccupancyRate = occupancyPercent;
+            selectedDeskId = ''; // Reset selection
+
+            document.getElementById('sheet-header-title').innerText = spaceName;
+            renderSpaceDetails(spaceName, occupancyPercent, distance, zone);
+            document.getElementById('selected-desk-prompt').innerText = 'Choose a focus seat';
+            document.getElementById('selected-desk-prompt').style.color = '';
+
+            // Populate interactive seat map
+            const seatGridBox = document.getElementById('sheet-seat-grid');
+            seatGridBox.innerHTML = '';
+
+            for (let i = 1; i <= 18; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'seat-cell';
+                cell.innerText = 'A-' + i;
+
+                // Occupied state simulation (randomized for realism)
+                const occupied = Math.random() < 0.4;
+                if (occupied) {
+                    cell.classList.add('occupied');
+                } else {
+                    cell.onclick = function () {
+                        deskSelectionClick(cell, 'A-' + i);
+                    };
+                }
+                seatGridBox.appendChild(cell);
+            }
+
+            // Default duration
+            updateDurationPrice(2, 80);
+
+            // Slide up
+            document.getElementById('sheet-backdrop').classList.add('active');
+            document.getElementById('sheet-panel').classList.add('active');
+        }
+
+        function deskSelectionClick(elementNode, name) {
+            document.querySelectorAll('.seat-cell.selected').forEach(n => {
+                n.classList.remove('selected');
+            });
+            elementNode.classList.add('selected');
+            selectedDeskId = name;
+
+            const prompt = document.getElementById('selected-desk-prompt');
+
+            prompt.innerText = 'Seat ' + name + ' Selected';
+            prompt.style.color = 'var(--zyvo-orange)';
+        }
+
+        function updateDurationPrice(hours, price) {
+            document.querySelectorAll('.hour-chip-btn').forEach((btn, index) => {
+                btn.classList.remove('active');
+                if ((hours === 2 && index === 0) || (hours === 4 && index === 1) || (hours === 8 && index === 2)) {
+                    btn.classList.add('active');
+                }
+            });
+            selectedPrice = price;
+            selectedHourDuration = hours + ' Hours';
+            document.getElementById('price-amount-lbl').innerText = '₹' + price;
+        }
+
+        function closeSheet() {
+            document.getElementById('sheet-backdrop').classList.remove('active');
+            document.getElementById('sheet-panel').classList.remove('active');
+        }
+
+        // Submit reservation and trigger success modal receipt
+        function confirmReservationSubmit() {
+            if (!selectedDeskId) {
+                const prompt = document.getElementById('selected-desk-prompt');
+                prompt.innerText = '⚠️ Select a seat first!';
+                prompt.style.color = '#EF4444';
+
+                const grid = document.getElementById('sheet-seat-grid');
+                grid.style.transform = 'translateX(4px)';
+                setTimeout(() => grid.style.transform = 'translateX(-4px)', 80);
+                setTimeout(() => grid.style.transform = 'translateX(2px)', 160);
+                setTimeout(() => grid.style.transform = '', 240);
+                return;
+            }
+
+            closeSheet();
+
+            // Set digital ticket text
+            document.getElementById('receipt-space-name').innerText = currentSelectedSpace;
+            document.getElementById('receipt-desk-id').innerText = 'Desk ' + selectedDeskId;
+            document.getElementById('receipt-duration').innerText = selectedHourDuration;
+
+            // Save reservation
+            const newReserveItem = {
+                space: currentSelectedSpace,
+                desk: selectedDeskId,
+                duration: selectedHourDuration,
+                price: selectedPrice,
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                ticketCode: 'ZYV-' + Math.floor(1000 + Math.random() * 9000) + '-F'
+            };
+            localReservationsArray.push(newReserveItem);
+            refreshBookingsList();
+
+            // Show receipt view and trigger confetti particles
+            document.getElementById('receipt-overlay').style.display = 'flex';
+            fireCanvasConfetti();
+        }
+
+        function dismissReceiptOverlay() {
+            document.getElementById('receipt-overlay').style.display = 'none';
+            // Auto route to active bookings
+            const reserveTabBtn = document.querySelector('[onclick*="reserve"]');
+            navigationTabSwitch('reserve', reserveTabBtn);
+        }
+
+        function refreshBookingsList() {
+            const emptyBox = document.getElementById('list-empty-bookings-box');
+            const listContainer = document.getElementById('list-populated-bookings');
+
+            if (localReservationsArray.length === 0) {
+                emptyBox.style.display = 'flex';
+                listContainer.style.display = 'none';
+            } else {
+                emptyBox.style.display = 'none';
+                listContainer.style.display = 'flex';
+                listContainer.innerHTML = '';
+
+                localReservationsArray.forEach((booking, idx) => {
+                    const item = document.createElement('div');
+                    item.className = 'compact-space-card';
+                    item.style.gridTemplateColumns = '1fr auto';
+
+                    item.innerHTML = `
+            <div class="compact-details">
+              <h4 class="compact-title">${booking.space}</h4>
+              <div class="compact-meta-row" style="margin-top:2px;">
+                <span style="font-weight:700; color:var(--zyvo-orange)">${booking.desk}</span>
+                <span>•</span>
+                <span>${booking.duration}</span>
+                <span>•</span>
+                <span>${booking.time}</span>
+              </div>
+              <div class="compact-meta-row" style="margin-top:2px; font-family:monospace; font-size:11px; color:var(--zyvo-text-disclaimer);">
+                CODE: ${booking.ticketCode}
+              </div>
+            </div>
+            <div>
+              <button class="btn-compact-reserve" style="background:rgba(239, 68, 68, 0.08); color:#EF4444; border-color:rgba(239, 68, 68, 0.15);" onclick="cancelReservation(${idx})">
+                Cancel
+              </button>
+            </div>
+          `;
+                    listContainer.appendChild(item);
+                });
+            }
+        }
+
+        function cancelReservation(index) {
+            localReservationsArray.splice(index, 1);
+            refreshBookingsList();
+        }
+
+        // Clean inline-phone canvas confetti engine
+        const phoneConfetti = document.getElementById('phone-confetti-canvas');
+        const pCtx = phoneConfetti.getContext('2d');
+        let particlesArray = [];
+        let animationLoopId = null;
+
+        function resizePhoneCanvas() {
+            phoneConfetti.width = 402; // matches phone mockup width
+            phoneConfetti.height = 874; // matches phone mockup height
+        }
+        resizePhoneCanvas();
+
+        function fireCanvasConfetti() {
+            if (animationLoopId) {
+                cancelAnimationFrame(animationLoopId);
+                particlesArray = [];
+            }
+
+            const colors = ['#F97316', '#FB923C', '#22C55E', '#3B82F6', '#EC4899', '#FBBF24'];
+
+            for (let i = 0; i < 80; i++) {
+                particlesArray.push({
+                    x: 201 + (Math.random() - 0.5) * 80,
+                    y: 437 + (Math.random() - 0.5) * 80,
+                    size: Math.random() * 6 + 4,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speedX: (Math.random() - 0.5) * 8,
+                    speedY: (Math.random() - 0.8) * 12 - 3,
+                    rotation: Math.random() * 360,
+                    rotationSpeed: (Math.random() - 0.5) * 8,
+                    opacity: 1
+                });
+            }
+
+            confettiLoopAnimate();
+        }
+
+        function confettiLoopAnimate() {
+            pCtx.clearRect(0, 0, phoneConfetti.width, phoneConfetti.height);
+            let runAnimation = false;
+
+            particlesArray.forEach(p => {
+                p.x += p.speedX;
+                p.y += p.speedY;
+                p.speedY += 0.28;
+                p.speedX *= 0.97;
+                p.rotation += p.rotationSpeed;
+
+                if (p.speedY > 0) {
+                    p.opacity -= 0.015;
+                }
+
+                if (p.opacity > 0 && p.y < phoneConfetti.height) {
+                    runAnimation = true;
+                    pCtx.save();
+                    pCtx.translate(p.x, p.y);
+                    pCtx.rotate(p.rotation * Math.PI / 180);
+                    pCtx.fillStyle = p.color;
+                    pCtx.globalAlpha = p.opacity;
+                    pCtx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                    pCtx.restore();
+                }
+            });
+
+            if (runAnimation) {
+                animationLoopId = requestAnimationFrame(confettiLoopAnimate);
+            } else {
+                pCtx.clearRect(0, 0, phoneConfetti.width, phoneConfetti.height);
+            }
+        }
+
+        let onbActiveSlideIndex = 0;
+        const onbMaxSlides = 3;
+
+        function scrollOnboardingSlide(index) {
+            onbActiveSlideIndex = index;
+            const track = document.getElementById('onb-slide-track-id');
+            const nextBtn = document.getElementById('onb-next-btn-id');
+            const subtextEl = document.getElementById('onb-footer-subtext-id');
+
+            const translateAmount = -index * 33.3333;
+            if (track) {
+                track.style.transform = `translateX(${translateAmount}%)`;
+            }
+
+            // Update pagination dots state dynamically
+            document.querySelectorAll('.app-onboarding-panel .onboard-slide').forEach((slide, sIdx) => {
+                const dots = slide.querySelectorAll('.onboard-dot');
+                dots.forEach((dot, dIdx) => {
+                    dot.classList.toggle('active', dIdx === index);
+                });
+            });
+
+            if (nextBtn) {
+                nextBtn.innerText = (index === onbMaxSlides - 1) ? 'Get started' : 'Next';
+            }
+            if (subtextEl) {
+                if (index === onbMaxSlides - 1) {
+                    subtextEl.innerHTML = 'I already have an account · <span style="color:var(--zyvo-orange); text-decoration:underline;">Sign in</span>';
+                } else {
+                    subtextEl.innerHTML = 'Skip';
+                }
+            }
+        }
+
+        function handleOnboardingNext() {
+            if (onbActiveSlideIndex < onbMaxSlides - 1) {
+                scrollOnboardingSlide(onbActiveSlideIndex + 1);
+            } else {
+                dismissOnboarding();
+            }
+        }
+
+        function handleOnboardingSubtextClick() {
+            dismissOnboarding();
+        }
+
+        function dismissOnboarding() {
+            const onboarding = document.getElementById('app-onboarding');
+            if (onboarding) {
+                onboarding.classList.add('hidden');
+            }
+        }
+
+        // ZYVO brand splash launch screen transitions
+        function triggerAppSplash() {
+            const splash = document.getElementById('app-splash');
+            const onboarding = document.getElementById('app-onboarding');
+            if (splash && onboarding) {
+                splash.classList.remove('hidden');
+                onboarding.classList.remove('hidden');
+                scrollOnboardingSlide(0); // Reset to first slide
+                setTimeout(() => {
+                    splash.classList.add('hidden');
+                }, 2800);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Auto-trigger splash transition on first load
+            setTimeout(() => {
+                const splash = document.getElementById('app-splash');
+                if (splash) {
+                    splash.classList.add('hidden');
+                }
+            }, 2800);
+        });
+    </script>
+
+</body>
+
+</html>
