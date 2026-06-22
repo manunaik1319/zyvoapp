@@ -117,7 +117,7 @@ export const MapTab: React.FC<MapTabProps> = ({
       const popupCard = document.createElement('div');
       popupCard.className = 'map-leaflet-popup-card';
       popupCard.innerHTML = `
-        <div style="font-family: 'Outfit', sans-serif; font-size: 11.5px; font-weight: 850; color: #0F172A; margin-bottom: 2px;">
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11.5px; font-weight: 850; color: #0F172A; margin-bottom: 2px;">
           ${marker.name}
         </div>
         <div style="display: flex; justify-content: space-between; align-items: center; font-size: 9.5px; color: #64748B; margin-bottom: 8px; font-weight: 600;">

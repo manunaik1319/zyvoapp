@@ -214,7 +214,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
                         fontSize: '9.5px',
                         padding: '4px 6px',
                         outline: 'none',
-                        fontFamily: "'Outfit', sans-serif"
+                        fontFamily: "'Plus Jakarta Sans', sans-serif"
                       }}
                     />
                   </div>
@@ -232,7 +232,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
                         fontSize: '9.5px',
                         padding: '4px 6px',
                         outline: 'none',
-                        fontFamily: "'Outfit', sans-serif"
+                        fontFamily: "'Plus Jakarta Sans', sans-serif"
                       }}
                     />
                   </div>

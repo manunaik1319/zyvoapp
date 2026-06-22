@@ -73,11 +73,11 @@ export const Onboarding: React.FC<OnboardingProps> = ({ activeSlide, setActiveSl
                   <rect x="125" y="27" width="30" height="6" rx="3" fill="#111827" />
                   
                   {/* Floor plan header */}
-                  <text x="140" y="48" fontFamily="Outfit" fontSize="7" fontWeight="800" fill="#0047FF" textAnchor="middle" letterSpacing="0.05em">STUDY ROOM PLAN</text>
+                  <text x="140" y="48" fontFamily="Plus Jakarta Sans" fontSize="7" fontWeight="800" fill="#0047FF" textAnchor="middle" letterSpacing="0.05em">STUDY ROOM PLAN</text>
                   
                   {/* Table 1: Rectangular Desk Row */}
                   <rect x="94" y="70" width="92" height="20" rx="4" fill="#F1F5F9" stroke="#E2E8F0" strokeWidth="1" />
-                  <text x="140" y="82" fontFamily="Outfit" fontSize="5" fontWeight="800" fill="#94A3B8" textAnchor="middle">FOCUS ZONE A</text>
+                  <text x="140" y="82" fontFamily="Plus Jakarta Sans" fontSize="5" fontWeight="800" fill="#94A3B8" textAnchor="middle">FOCUS ZONE A</text>
                   
                   {/* Seats around Table 1 */}
                   {/* Top seats */}
@@ -102,7 +102,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ activeSlide, setActiveSl
 
                   {/* Table 2: Circular Group Hub */}
                   <circle cx="140" cy="146" r="16" fill="#F1F5F9" stroke="#E2E8F0" strokeWidth="1" />
-                  <text x="140" y="148" fontFamily="Outfit" fontSize="4.5" fontWeight="800" fill="#94A3B8" textAnchor="middle">HUB B</text>
+                  <text x="140" y="148" fontFamily="Plus Jakarta Sans" fontSize="4.5" fontWeight="800" fill="#94A3B8" textAnchor="middle">HUB B</text>
                   
                   {/* Chairs around Table 2 */}
                   <circle cx="116" cy="146" r="5" fill="#E4E4E7" stroke="#D1D1D6" strokeWidth="1" />
@@ -111,7 +111,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ activeSlide, setActiveSl
 
                   {/* Screen Footer Booking Card */}
                   <rect x="85" y="190" width="110" height="42" rx="8" fill="#FFFFFF" stroke="#F3F4F6" strokeWidth="1" />
-                  <text x="92" y="201" fontFamily="Outfit" fontSize="6.5" fontWeight="800" fill="#111827">Selected Seat</text>
+                  <text x="92" y="201" fontFamily="Plus Jakarta Sans" fontSize="6.5" fontWeight="800" fill="#111827">Selected Seat</text>
                   <text x="92" y="211" fontFamily="Inter" fontSize="8" fontWeight="800" fill="#0047FF">Desk 02 (Focus)</text>
                   <rect x="92" y="219" width="96" height="9" rx="3.5" fill="#0047FF" />
                   <text x="140" y="225" fontFamily="Inter" fontSize="5.5" fontWeight="900" fill="#FFFFFF" textAnchor="middle">CONFIRM SEAT</text>

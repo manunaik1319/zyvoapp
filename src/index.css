@@ -330,7 +330,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .brand-logo-name {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 24px;
   font-weight: 800;
   letter-spacing: -0.04em;
@@ -393,7 +393,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .greeting-headline {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 25px;
   font-weight: 800;
   letter-spacing: -0.03em;
@@ -650,7 +650,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .row-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 17px;
   font-weight: 800;
   color: var(--zyvo-text-main);
@@ -672,7 +672,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .featured-section-heading h3 {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 17px;
   font-weight: 800;
   letter-spacing: -0.025em;
@@ -804,7 +804,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 .image-space-copy strong {
   display: block;
   color: #FFF;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 17px;
   letter-spacing: -0.02em;
 }
@@ -883,7 +883,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 
 .space-price strong {
   display: block;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   color: #18181B;
   font-size: 18px;
 }
@@ -1001,7 +1001,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .compact-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 15px;
   font-weight: 800;
   color: var(--zyvo-text-main);
@@ -1203,7 +1203,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .profile-page-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 23px;
   font-weight: 800;
   letter-spacing: -0.04em;
@@ -1344,7 +1344,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .campus-student-name {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 22px;
   font-weight: 800;
   letter-spacing: -.03em;
@@ -1425,7 +1425,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .profile-section-heading h3 {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 16px;
   font-weight: 800;
   letter-spacing: -.02em;
@@ -1497,7 +1497,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 .stat-value {
   display: block;
   margin-top: 8px;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 18px;
   font-weight: 800;
   letter-spacing: -.025em;
@@ -1529,7 +1529,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
   right: -7px;
   bottom: -19px;
   color: rgba(255,255,255,0.08);
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 66px;
   font-weight: 800;
   letter-spacing: -.08em;
@@ -1554,7 +1554,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 
 .wallet-balance {
   margin-top: 4px;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 27px;
   font-weight: 800;
   letter-spacing: -.035em;
@@ -1639,7 +1639,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .premium-title-row strong {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 14px;
   color: #18181B;
 }
@@ -1699,7 +1699,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .progress-card-head strong {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 14px;
   color: #18181B;
 }
@@ -1923,7 +1923,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .sheet-title-text {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 18px;
   font-weight: 800;
   color: var(--zyvo-text-main);
@@ -2205,7 +2205,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .pricing-text-val {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 20px;
   font-weight: 800;
   color: var(--zyvo-orange);
@@ -2326,7 +2326,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .splash-brand-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 40px;
   font-weight: 900;
   letter-spacing: -0.05em;
@@ -2482,7 +2482,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .onboard-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 26px;
   font-weight: 800;
   line-height: 1.25;
@@ -2630,7 +2630,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .receipt-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 24px;
   font-weight: 800;
   color: var(--zyvo-text-main);
@@ -2729,7 +2729,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .brand-center-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 26px;
   font-weight: 900;
   letter-spacing: -0.05em;
@@ -2803,7 +2803,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.25);
   color: #FFFFFF;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 11px;
   font-weight: 700;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
@@ -3054,7 +3054,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .auth-welcome-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 24px;
   font-weight: 800;
   color: #FFFFFF; /* Contrast against blue */
@@ -3433,7 +3433,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .auth-success-message h3 {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 20px;
   font-weight: 800;
   color: var(--zyvo-text-main);
@@ -4149,7 +4149,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .h-scroll-name {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 12.5px;
   font-weight: 800;
   color: var(--zyvo-text-main);
@@ -4189,7 +4189,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .h-scroll-price {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 12px;
   font-weight: 800;
   color: #0047FF;
@@ -4253,7 +4253,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 .dv2-greeting-block { flex: 1; min-width: 0; }
 
 .dv2-greeting {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 21px;
   font-weight: 900;
   color: var(--zyvo-text-main);
@@ -4452,7 +4452,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .dv2-sec-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 16px;
   font-weight: 900;
   color: var(--zyvo-text-main);
@@ -4585,7 +4585,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .dv2-f-name {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 13px;
   font-weight: 900;
   color: #FFFFFF;
@@ -4642,7 +4642,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 .dv2-price-block { flex-shrink: 0; }
 
 .dv2-price {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 18px;
   font-weight: 900;
   color: var(--zyvo-text-main);
@@ -4808,7 +4808,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .dv2-hcard-name {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 12px;
   font-weight: 800;
   color: var(--zyvo-text-main);
@@ -4837,7 +4837,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .dv2-hcard-price {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 12px;
   font-weight: 900;
   color: var(--zyvo-orange);
@@ -4897,7 +4897,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 .dv2-fc-emoji { font-size: 20px; line-height: 1; }
 
 .dv2-fc-val {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 20px;
   font-weight: 900;
   color: var(--zyvo-text-main);
@@ -5000,7 +5000,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .dv2-result-price {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 13px;
   font-weight: 900;
   color: #0F1B35;
@@ -5096,7 +5096,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .dv2-filter-empty-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 16px;
   font-weight: 900;
   color: #0F172A;
@@ -5195,7 +5195,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .seeall-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 17px;
   font-weight: 900;
   color: var(--zyvo-text-main);
@@ -5380,7 +5380,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .seeall-card-name {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 13px;
   font-weight: 850;
   color: #0F172A;
@@ -5447,7 +5447,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .seeall-price {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 15px;
   font-weight: 900;
   letter-spacing: -0.03em;
@@ -5502,7 +5502,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .seeall-empty-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 16px;
   font-weight: 900;
   color: #0F172A;
@@ -5563,7 +5563,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 
 /* ── SIGNUP: "Welcome to ZYVO" — left → right ── */
 .welcome-anim-text {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 36px;
   font-weight: 900;
   letter-spacing: -0.04em;
@@ -5670,7 +5670,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .nearby-header h2 {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 18px;
   font-weight: 900;
   color: var(--zyvo-text-main);
@@ -5829,7 +5829,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .nearby-card-info h4 {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 13.5px;
   font-weight: 800;
   color: var(--zyvo-text-main);
@@ -5860,7 +5860,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
   font-size: 13px;
   font-weight: 900;
   color: var(--zyvo-orange);
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 .nearby-card-price small {
@@ -5908,7 +5908,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .payment-flow-header h2 {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 17px;
   font-weight: 850;
   color: var(--zyvo-text-main);
@@ -5978,7 +5978,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .checkout-space-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 14px;
   font-weight: 800;
   color: var(--zyvo-text-main);
@@ -6028,7 +6028,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 15px;
   font-weight: 850;
   color: var(--zyvo-text-main);
@@ -6223,7 +6223,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .card-brand {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 15px;
   font-weight: 800;
   font-style: italic;
@@ -6696,7 +6696,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .wallet-balance-val {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 24px;
   font-weight: 850;
   margin-top: 4px;
@@ -6849,7 +6849,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .processing-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 16px;
   font-weight: 850;
   color: var(--zyvo-text-main);
@@ -6936,7 +6936,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .success-header-copy h3 {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 18px;
   font-weight: 850;
   color: var(--zyvo-text-main);
@@ -6994,7 +6994,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .ticket-brand {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 13px;
   font-weight: 850;
   letter-spacing: -0.03em;
@@ -7019,7 +7019,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .ticket-space-name {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 15px;
   font-weight: 850;
   color: var(--zyvo-text-main);
@@ -7219,7 +7219,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .profile-page-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 18px;
   font-weight: 850;
   color: var(--zyvo-text-main);
@@ -7314,7 +7314,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -7393,7 +7393,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .campus-student-name {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 16px;
   font-weight: 850;
   color: #FFFFFF;
@@ -7461,7 +7461,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .profile-section-heading h3 {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 13.5px;
   font-weight: 850;
   color: var(--zyvo-text-main);
@@ -7531,7 +7531,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .stat-value {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 16px;
   font-weight: 850;
   color: var(--zyvo-text-main);
@@ -7571,7 +7571,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .wallet-balance {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 22px;
   font-weight: 850;
   margin-top: 2px;
@@ -7652,7 +7652,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .premium-title-row strong {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 13px;
   font-weight: 800;
   color: #92400E;
@@ -8026,7 +8026,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .reserve-greeting-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 19px;
   font-weight: 900;
   color: var(--zyvo-text-main);
@@ -8137,7 +8137,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
   font-size: 14px;
   font-weight: 850;
   color: var(--zyvo-text-main);
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   line-height: 1.2;
   margin-top: 1px;
 }
@@ -8217,7 +8217,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .reserve-card-name {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 14px;
   font-weight: 850;
   color: #0F172A;
@@ -8415,7 +8415,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .reserve-empty-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 17px;
   font-weight: 900;
   color: #0F172A;
@@ -8533,7 +8533,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .wallet-ticket-space-name {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 18px;
   font-weight: 900;
   margin: 0 0 4px;
@@ -8694,7 +8694,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 }
 
 .reserve-sheet-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 17px;
   font-weight: 900;
   color: #0F172A;
@@ -8840,7 +8840,7 @@ button:active:not(:disabled), .onboard-next-btn:active {
 .booking-stat-card-glass .stat-value {
   font-size: 14.5px;
   font-weight: 850;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 /* Redesigned Glassmorphism Booking Cards */

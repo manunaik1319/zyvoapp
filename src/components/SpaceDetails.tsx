@@ -99,7 +99,7 @@ export const SpaceDetails: React.FC<SpaceDetailsProps> = ({
     const marker = L.marker(coords, { icon: customIcon }).addTo(map);
 
     marker.bindPopup(`
-      <div style="font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 800; color: #0F172A; text-align: center;">
+      <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 800; color: #0F172A; text-align: center;">
         ${space.name}
       </div>
     `, { closeButton: false, offset: [0, -10] }).openPopup();
